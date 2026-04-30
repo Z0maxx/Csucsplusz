@@ -1,0 +1,218 @@
+@import "tailwindcss";
+
+@view-transition {
+    navigation: auto;
+}
+
+@keyframes fade-out {
+  to {
+    opacity: 0;
+  }
+}
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+}
+
+main {
+    view-transition-name: main;
+}
+
+::view-transition-group(main){
+  animation-duration: 200ms;
+}
+
+::view-transition-old(main) {
+  animation-name: fade-out;
+}
+
+::view-transition-new(main) {
+  animation-name: fade-in;
+}
+
+@property --gradient-angle {
+    syntax: '<angle>';
+    initial-value: 0deg;
+    inherits: false;
+}
+
+@property --gradient-percentage1 {
+    syntax: '<percentage>';
+    initial-value: 0%;
+    inherits: false;
+}
+
+@property --gradient-percentage2 {
+    syntax: '<percentage>';
+    initial-value: 0%;
+    inherits: false;
+}
+
+@property --gradient-percentage3 {
+    syntax: '<percentage>';
+    initial-value: 0%;
+    inherits: false;
+}
+
+@property --gradient-percentage4 {
+    syntax: '<percentage>';
+    initial-value: 0%;
+    inherits: false;
+}
+
+@keyframes menu-anim {
+    0% {
+        transition-duration: 0;
+        left: -100%
+    }
+
+    1% {
+        transition-duration: inherit;
+    }
+
+    50% {
+        left: 1%
+    }
+
+    75% {
+        left: -1%
+    }
+
+    90% {
+        left: 0.5%
+    }
+
+    100% {
+        left: 0%
+    }
+}
+
+@keyframes gradient-angle {
+    to {
+        --gradient-angle: 360deg
+    }
+}
+
+@keyframes wiggle {
+    0% {
+        transform: rotate(0deg)
+    }
+
+    10% {
+        transform: rotate(4deg)
+    }
+
+    25% {
+        transform: rotate(-4deg)
+    }
+
+    40% {
+        transform: rotate(2deg)
+    }
+
+    55% {
+        transform: rotate(-2deg)
+    }
+
+    70% {
+        transform: rotate(1deg)
+    }
+
+    85% {
+        transform: rotate(-1deg)
+    }
+
+    100% {
+        transform: rotate(0deg)
+    }
+}
+
+@keyframes gradient-percentage {
+    0% {
+        --gradient-percentage1: 0%;
+        --gradient-percentage2: 20%;
+        --gradient-percentage3: 80%;
+        --gradient-percentage4: 100%;
+    }
+
+    100% {
+        --gradient-percentage1: 100%;
+        --gradient-percentage2: 120%;
+        --gradient-percentage3: 180%;
+        --gradient-percentage4: 200%;
+    }
+}
+
+@media (max-width: 40rem) {
+    :root {
+        --menu-anim-duration: 250ms
+    }
+}
+
+@media (min-width: 40rem) {
+    :root {
+        --menu-anim-duration: 300ms
+    }
+}
+
+@media (max-width: 64rem) {
+
+    #menu-checkbox:not(:checked)~#menu-button>div>#burger,
+    #menu-checkbox:checked~#menu-button>div>#x {
+        left: 0;
+    }
+
+    #menu-checkbox:not(:checked)~#menu-button>div>#x,
+    #menu-checkbox:checked~#menu-button>div>#burger {
+        left: -100%;
+    }
+
+    #menu-checkbox:not(:checked)~nav>#menu-wrap>div>#menu {
+        left: 100%;
+    }
+
+    #menu-checkbox:checked~nav>#menu-wrap>div>#menu {
+        animation: menu-anim 350ms ease-in-out
+    }
+
+    #menu-checkbox:checked~#blocker {
+        opacity: 1;
+        pointer-events: auto;
+    }
+}
+
+.text-border {
+    text-shadow:
+        -1px -1px var(--text-border-color),
+        -1px 1px var(--text-border-color),
+        1px -1px var(--text-border-color),
+        1px 1px var(--text-border-color),
+        -2px 0px var(--text-border-color),
+        0px -2px var(--text-border-color),
+        2px 0px var(--text-border-color),
+        0px 2px var(--text-border-color);
+}
+
+.text-border-light {
+    text-shadow:
+        -1px -1px var(--text-border-color),
+        -1px 1px var(--text-border-color),
+        1px -1px var(--text-border-color),
+        1px 1px var(--text-border-color);
+}
+
+.sliding-bg {
+    animation: gradient-percentage var(--time) linear infinite;
+    background-image: repeating-linear-gradient(var(--angle),
+            var(--bg-1) var(--gradient-percentage1),
+            var(--bg-1) var(--gradient-percentage2),
+            var(--bg-2),
+            var(--bg-1) var(--gradient-percentage3),
+            var(--bg-1) var(--gradient-percentage4))
+}
+
+.rotating-bg {
+    animation: gradient-angle var(--time) linear infinite;
+    background-image: linear-gradient(var(--gradient-angle), var(--bg-1), var(--bg-2));
+}
