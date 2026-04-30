@@ -21,7 +21,7 @@
                 <input type="date" id="birth-date" name="birth-date" required class="py-0.5 px-1 bg-blue-100 rounded-sm focus:outline-cyan-500 outline-2 outline-blue-300 caret-sky-800">
             </div>
             <div class="flex flex-col gap-2 px-2 pt-1 pb-2.5 rounded-md has-[input:invalid]:border-amber-500 border-2 border-green-500 bg-slate-200">
-                <label for="mother-name" class="text-lg font-medium md:text-xl text-mauve-600">Anyja neve <span class="text-xl font-bold text-red-500 md:text-2xl leading-1">*</span></label>
+                <label for="mother-name" class="text-lg font-medium md:text-xl text-mauve-600">Anyja születési neve <span class="text-xl font-bold text-red-500 md:text-2xl leading-1">*</span></label>
                 <input type="text" id="mother-name" name="mother-name" required class="py-0.5 px-1 bg-blue-100 rounded-sm focus:outline-cyan-500 outline-2 outline-blue-300 caret-sky-800">
             </div>
             <div class="flex flex-col gap-2 px-2 pt-1 pb-2.5 rounded-md has-[input:invalid]:border-amber-500 border-2 border-green-500 bg-slate-200">
