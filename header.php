@@ -31,12 +31,13 @@
                 <div id="menu" class="flex-wrap lg:h-full absolute will-change-[left] left-0 top-35 flex flex-col items-center pointer-events-auto justify-start w-full text-lg transition-all lg:static duration-200 bg-sky-600 lg:bg-sky-500 lg:justify-center lg:flex-row lg:w-auto divide-y-2 lg:divide-y-0 lg:divide-x-2 divide-cyan-400 divide-solid">
                     <a href="index.php" class="w-full px-1.5 py-2 transition lg:py-1 lg:w-auto hover:bg-sky-400 <?php echo $page == "index" ? "bg-sky-800" : ""; ?>">Kezdőlap</a>
                     <a href="tanfolyami-adatok.php" class="w-full px-1.5 py-2 transition lg:py-1 lg:w-auto hover:bg-sky-400 <?php echo $page == "tanfolyami-adatok" ? "bg-sky-800" : ""; ?>">Tanfolyami Adatok</a>
-                    <a href="irasos-tajekoztato" class="w-full px-1.5 py-2 transition lg:py-1 lg:w-auto hover:bg-sky-400 <?php echo $page == "irasos-tajekoztato" ? "bg-sky-800" : ""; ?>">Írásos Tájékoztató</a>
-                    <a href="szerzodes-minta" class="w-full px-1.5 py-2 transition lg:py-1 lg:w-auto hover:bg-sky-400 <?php echo $page == "szerzodes-minta" ? "bg-sky-800" : ""; ?>">Szerződés minta</a>
-                    <a href="gdpr" class="w-full px-1.5 py-2 transition lg:py-1 lg:w-auto hover:bg-sky-400 <?php echo $page == "gdpr" ? "bg-sky-800" : ""; ?>">GDPR</a>
-                    <a href="statisztika" class="w-full px-1.5 py-2 transition lg:py-1 lg:w-auto hover:bg-sky-400 <?php echo $page == "statisztika" ? "bg-sky-800" : ""; ?>">Statisztika</a>
+                    <a href="irasos-tajekoztato.php" class="w-full px-1.5 py-2 transition lg:py-1 lg:w-auto hover:bg-sky-400 <?php echo $page == "irasos-tajekoztato" ? "bg-sky-800" : ""; ?>">Írásos Tájékoztató</a>
+                    <a href="szerzodes-minta.php" class="w-full px-1.5 py-2 transition lg:py-1 lg:w-auto hover:bg-sky-400 <?php echo $page == "szerzodes-minta" ? "bg-sky-800" : ""; ?>">Szerződés minta</a>
+                    <a href="gdpr.php" class="w-full px-1.5 py-2 transition lg:py-1 lg:w-auto hover:bg-sky-400 <?php echo $page == "gdpr" ? "bg-sky-800" : ""; ?>">GDPR</a>
+                    <a href="statisztika.php" class="w-full px-1.5 py-2 transition lg:py-1 lg:w-auto hover:bg-sky-400 <?php echo $page == "statisztika" ? "bg-sky-800" : ""; ?>">Statisztika</a>
                 </div>
             </div>
         </div>
         <a href="jelentkezes.php" class="px-3.5 py-1.5 mb-2 text-xl transition border-2 rounded-full border-emerald-300 bg-emerald-600 hover:scale-105 lg:mb-0 hover:bg-emerald-500 focus:scale-105 focus:bg-emerald-500 <?php echo $page == "jelentkezes" ? "bg-emerald-700" : "" ?>">Online Jelentkezés</a>
+    </nav>
 </header>

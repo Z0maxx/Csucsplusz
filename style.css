@@ -15,6 +15,14 @@
   }
 }
 
+ul {
+  @apply list-disc list-inside
+}
+
+ol {
+  @apply list-decimal list-inside
+}
+
 main {
     view-transition-name: main;
 }
@@ -215,4 +223,108 @@ main {
 .rotating-bg {
     animation: gradient-angle var(--time) linear infinite;
     background-image: linear-gradient(var(--gradient-angle), var(--bg-1), var(--bg-2));
+}
+
+.wpcf7-radio label {
+  @apply cursor-pointer has-[input:focus]:outline-cyan-500 outline-2 outline-transparent rounded-sm px-1;
+}
+
+.wpcf7-radio input {
+  @apply py-0.5 px-1 bg-blue-100 border-2 border-transparent focus:border-cyan-500 caret-sky-800 cursor-pointer;
+}
+
+.wpcf7-radio > span.wpcf7-list-item {
+  @apply m-0
+}
+
+.wpcf7-form-control {
+  @apply flex gap-4;
+}
+
+.wpcf7-text {
+  @apply py-0.5 px-1 bg-blue-100 rounded-sm focus:outline-cyan-500 outline-2 outline-blue-300 caret-sky-800;
+}
+
+.wpcf7-date {
+  @apply py-0.5 px-1 bg-blue-100 rounded-sm focus:outline-cyan-500 outline-2 outline-blue-300 caret-sky-800;
+}
+
+.wpcf7-select {
+  @apply py-0.5 px-1 bg-blue-100 rounded-sm cursor-pointer focus:outline-cyan-500 outline-2 outline-blue-300 caret-sky-800;
+}
+
+.wpcf7-file {
+  @apply py-0.5 px-1 bg-blue-100 rounded-sm cursor-pointer file:bg-sky-300 file:rounded-sm file:my-1 file:px-1 file:py-0.5 focus:outline-cyan-500 outline-2 outline-blue-300 file:font-medium;
+}
+
+.wpcf7-textarea {
+  @apply py-0.5 px-1 bg-blue-100 rounded-sm focus:outline-cyan-500 outline-2 outline-blue-300 caret-sky-800;
+}
+
+.wpcf7-text,
+.wpcf7-select,
+.wpcf7-file,
+.wpcf7-textarea,
+.wpcf7-date {
+  @apply w-full;
+}
+
+.control-div {
+  @apply flex flex-col gap-2 px-2 pt-1 pb-2.5 border-2 rounded-md border-slate-500 bg-slate-200;
+}
+
+.control-title {
+ @apply text-lg font-medium md:text-xl text-mauve-600;
+}
+
+.control-required {
+  @apply text-xl font-bold text-red-500 md:text-2xl leading-1;
+}
+
+.colored-list {
+  @apply [&>li]:my-4 [&>li]:[&>span]:bg-[var(--list-color)] [&>li]:[&>span]:px-1 [&>li]:[&>span]:py-0.5 [&>li]:[&>span]:rounded-md [&>li]:[&>span]:font-semibold;
+}
+
+.instructor {
+  @apply flex flex-col w-full;
+}
+
+.instructor-name {
+  @apply px-2 border-b-2 border-blue-400 rounded-t-lg bg-cyan-300 md:text-nowrap;
+}
+
+.instructor-titles {
+  @apply px-2 rounded-b-lg bg-cyan-200 text-emerald-950;
+}
+
+.instructor-group {
+  @apply flex flex-col w-full gap-4 sm:flex-row;
+}
+
+.crt-day {
+  @apply py-1 pl-2 pr-1 text-indigo-900;
+}
+
+.crt-time {
+  @apply py-1 pr-2 text-green-900;
+}
+
+.crt-table {
+  @apply font-medium bg-teal-100 rounded-xl;
+}
+
+.wpcf7-form {
+  @apply flex flex-col w-full gap-4 p-2 border-2 md:p-4 sm:w-fit border-cyan-300 bg-cyan-100 rounded-xl;
+}
+
+.valid-control {
+  @apply border-green-500
+}
+
+.invalid-control {
+  @apply border-amber-500
+}
+
+.grecaptcha-badge {
+  display: none !important;
 }

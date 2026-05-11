@@ -1,91 +1,220 @@
 <?php include "header.php" ?>
-<title>Kezdőlap | Csúcsplusz Autósiskola</title>
+<title>Tanfolyami Adatok | Csúcsplusz Autósiskola</title>
 <main class="bg-sky-200">
-    <section class="flex justify-center py-4 bg-blue-200">
-        <div class="w-9/10 lg:w-4/5 lg:min-w-[63rem]">
-            <h2 class="inline-block pb-0.75 mb-3 text-2xl font-bold sm:text-3xl bg-gradient-to-r from-sky-500 to-purple-500 text-sky-800">
-                <span class="block pb-1 bg-blue-200">Tandíjak és vizsgadíjak</span>
-            </h2>
-            <div class="flex flex-col w-full gap-4 text-lg lg:flex-row">
-                <div class="flex-1 p-2 border-4 rounded-lg bg-gradient-to-br from-white to-sky-200 border-emerald-400">
-                    <div class="flex items-center gap-2 mb-2">
-                        <span class="inline-block size-10 sm:size-12 p-2 rounded-full sliding-bg [--time:3s] [--angle:135deg] [--bg-1:var(--color-sky-900)] [--bg-2:var(--color-sky-600)]">
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -16.04 72.617 72.617" class="fill-white">
-                                <g id="Group_58" data-name="Group 58" transform="translate(-621.208 -934.226)">
-                                    <g id="Group_57" data-name="Group 57">
-                                        <path id="Path_48" data-name="Path 48" d="M688.461,944.951a191.915,191.915,0,0,0-11.136-10.725h-50.3a5.823,5.823,0,0,0-5.817,5.816v18.223A192.8,192.8,0,0,0,631.935,969.4a6.063,6.063,0,0,0,6.014,5.364h49.819a6.064,6.064,0,0,0,6.057-6.057V950.965A6.063,6.063,0,0,0,688.461,944.951Zm-64.253,13.314V940.042a2.82,2.82,0,0,1,2.817-2.816h50.3a2.815,2.815,0,0,1,2.769,2.341H632.367a5.824,5.824,0,0,0-5.817,5.817v15.649A2.816,2.816,0,0,1,624.208,958.265Zm5.342,5.341V945.384a2.821,2.821,0,0,1,2.817-2.817h50.3a2.816,2.816,0,0,1,2.769,2.341H637.949a6.064,6.064,0,0,0-6.057,6.057v15.41A2.815,2.815,0,0,1,629.55,963.606Zm61.275,5.1a3.061,3.061,0,0,1-3.057,3.057H637.949a3.06,3.06,0,0,1-3.057-3.057V950.965a3.06,3.06,0,0,1,3.057-3.057h49.819a3.061,3.061,0,0,1,3.057,3.057Z" />
-                                        <path id="Path_49" data-name="Path 49" d="M662.858,950c-4.952,0-8.981,4.411-8.981,9.834s4.029,9.833,8.981,9.833,8.981-4.411,8.981-9.833S667.81,950,662.858,950Zm0,16.667c-3.3,0-5.981-3.066-5.981-6.833S659.56,953,662.858,953s5.981,3.065,5.981,6.834S666.156,966.67,662.858,966.67Z" />
-                                        <path id="Path_50" data-name="Path 50" d="M681.352,954.732a5.1,5.1,0,1,0,5.1,5.1A5.111,5.111,0,0,0,681.352,954.732Zm0,7.208a2.1,2.1,0,1,1,2.1-2.1A2.107,2.107,0,0,1,681.352,961.94Z" />
-                                        <path id="Path_51" data-name="Path 51" d="M644.717,954.732a5.1,5.1,0,1,0,5.1,5.1A5.11,5.11,0,0,0,644.717,954.732Zm0,7.208a2.1,2.1,0,1,1,2.1-2.1A2.1,2.1,0,0,1,644.717,961.94Z" />
-                                    </g>
-                                    <path id="Path_52" data-name="Path 52" d="M662.531,962.846c-1.6-.11-2.423-.94-2.478-2.184h1.833a.8.8,0,0,0,.645.784v-1.2c-1.686-.23-2.349-.811-2.349-2.1,0-1.151.884-1.962,2.349-2.063v-.82h.746v.829c1.373.11,2.193.728,2.294,2.027h-1.8a.64.64,0,0,0-.5-.627v1.133c1.428.194,2.386.664,2.386,2.009,0,1.152-.718,2.1-2.386,2.211V964h-.746Zm0-4.321v-1.059c-.378.064-.571.258-.571.525C661.96,958.286,662.107,958.433,662.531,958.525Zm.746,1.852v1.087c.378-.083.553-.295.553-.58C663.83,960.617,663.692,960.478,663.277,960.377Z" />
-                                </g>
-                            </svg>
-                        </span>
-                        <span class="text-xl font-semibold sm:text-2xl text-sky-900">Tandíjak</span>
-                    </div>
-                    <div class="flex flex-col w-full divide-y-2 divide-gray-300">
-                        <div class="flex flex-col sm:flex-row sm:gap-2">
-                            <span>Elméleti képzés (E-learning)</span>
-                            <span class="flex-1 font-semibold sm:text-right text-sky-900">45.000 Ft</span>
-                        </div>
-                        <div class="flex flex-col sm:items-center sm:flex-row sm:gap-2">
-                            <span>Gyakorlati képzés</span>
-                            <div class="flex flex-col flex-1 gap-1 sm:text-right">
-                                <span class="font-semibold text-sky-900 ">Manuális v. autó: 9500 Ft / tanóra</span>
-                                <span class="font-semibold text-sky-900 ">Automata v. autó: 10.000 Ft / tanóra</span>
-                            </div>
-                        </div>
-                        <div class="flex flex-col sm:items-center sm:flex-row sm:gap-2">
-                            <span>Teljes képzés esetén</span>
-                            <div class="flex flex-col flex-1 gap-1 sm:text-right">
-                                <span class="font-semibold text-sky-900 ">Gyakorlati képzés: 285.000 Ft-tól / 29 tanóra</span>
-                                <span class="font-semibold text-sky-900 ">A képzés díja:  330.000 Ft-tól + vizsgaóra és vizsgadíj</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="flex-1 p-2 border-4 rounded-lg border-emerald-400 bg-gradient-to-br from-white to-rose-200">
-                    <div class="flex items-center gap-2 mb-2">
-                        <span class="inline-block size-10 sm:size-12 p-2 rounded-full sliding-bg [--time:3s] [--angle:135deg] [--bg-1:var(--color-rose-900)] [--bg-2:var(--color-rose-600)]">
-                            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="Layer_1" viewBox="0 0 295.24 295.24" xml:space="preserve" class="fill-white">
-                                <g>
-                                    <g>
-                                        <g>
-                                            <path d="M171.429,133.334c-23.633,0-42.857,19.224-42.857,42.857s19.224,42.857,42.857,42.857s42.857-19.224,42.857-42.857     S195.062,133.334,171.429,133.334z M171.429,209.524c-18.376,0-33.333-14.957-33.333-33.333     c0-18.376,14.957-33.333,33.333-33.333c18.376,0,33.333,14.957,33.333,33.333C204.762,194.568,189.805,209.524,171.429,209.524z" />
-                                            <path d="M289.657,262.724l-37.21-37.21c1.281-1.929,1.976-4.19,1.976-6.562c0-3.186-1.243-6.176-3.486-8.419     c-4.067-4.067-10.362-4.567-14.981-1.514l-7.905-7.905c2.619-5.924,4.348-12.314,4.986-19.029     c9.524-17.833,14.581-37.948,14.581-58.276C247.619,55.539,192.081,0.001,123.81,0.001S0,55.539,0,123.811     s55.538,123.81,123.81,123.81c16.495,0,32.5-4.762,47.605-9.524c0.005,0,0.01,0,0.014,0c11.386,0,22.024-3.143,31.2-8.529     l6.39,6.386c-3.052,4.619-2.552,10.914,1.51,14.976c2.248,2.252,5.238,3.49,8.424,3.49c2.371,0,4.633-0.69,6.562-1.976     l37.21,37.21c3.595,3.605,8.381,5.586,13.467,5.586s9.871-1.981,13.467-5.581c3.6-3.595,5.581-8.381,5.581-13.467     C295.238,271.105,293.257,266.319,289.657,262.724z M123.81,238.095c-63.014,0-114.286-51.271-114.286-114.286     S60.795,9.524,123.81,9.524s114.285,51.271,114.285,114.286c0,12.962-2.262,25.81-6.529,37.952     c-1.819-7.581-5.005-14.633-9.338-20.848c0.448-2.586,0.886-5.176,1.129-7.738l-8.238-0.79     c-11.205-11.176-26.652-18.1-43.69-18.1c-8.957,0-17.457,1.952-25.148,5.39c-1.957-0.376-3.905-0.629-5.805-0.629H123.81h-16.667     c-11.814,0-21.429-9.614-21.429-21.429s9.614-21.429,21.429-21.429h33.333c11.814,0,21.429,9.614,21.429,21.429v7.143h9.524     v-7.143c0-17.067-13.886-30.952-30.952-30.952h-11.905V47.62h-9.524v19.048h-11.905c-17.067,0-30.952,13.886-30.952,30.952     c0,17.066,13.886,30.952,30.952,30.952h16.667h8.119c-9.419,7.824-16.448,18.4-19.938,30.462     c-0.062,0.21-0.105,0.424-0.162,0.633c-0.467,1.681-0.886,3.386-1.21,5.119c-0.124,0.662-0.2,1.333-0.305,2     c-0.2,1.31-0.4,2.614-0.514,3.948c-0.019,0.233-0.071,0.457-0.09,0.69h-2.567c-11.814,0-21.429-9.614-21.429-21.429v-7.138H76.19     v7.144c0,17.067,13.886,30.952,30.952,30.952h2.624c1.005,13.086,6.033,25.057,13.933,34.614l0.11,8.243     c2.533,0,5.105-0.133,7.748-0.338c5.81,4.905,12.533,8.733,19.876,11.248C142.457,236.949,133.219,238.095,123.81,238.095z      M171.429,228.571c-28.881,0-52.381-23.5-52.381-52.381c0-1.567,0.1-3.11,0.233-4.643c0.048-0.552,0.114-1.1,0.181-1.648     c0.114-0.952,0.267-1.895,0.433-2.833c0.529-2.929,1.286-5.8,2.295-8.576c0.086-0.229,0.167-0.462,0.252-0.69     c2.967-7.824,7.781-14.876,14.024-20.51c0.081-0.071,0.162-0.148,0.243-0.224c0.867-0.771,1.757-1.514,2.676-2.229     c0.076-0.057,0.152-0.114,0.229-0.171c2.771-2.129,5.776-3.995,8.981-5.552c6.919-3.362,14.643-5.305,22.833-5.305     c28.881,0,52.381,23.5,52.381,52.381C223.809,205.071,200.31,228.571,171.429,228.571z M210.604,224.073     c4.939-4.048,9.215-8.858,12.71-14.229l5.738,5.738l-13.467,13.467L210.604,224.073z M220.639,244.205     c-0.61,0.61-1.314,0.695-1.686,0.695s-1.077-0.09-1.686-0.7c-0.924-0.929-0.924-2.438,0-3.367l23.567-23.567     c0.467-0.467,1.076-0.695,1.686-0.695s1.219,0.238,1.686,0.7c0.605,0.605,0.695,1.31,0.695,1.681c0,0.371-0.09,1.076-0.695,1.686     L220.639,244.205z M282.924,282.924c-3.6,3.6-9.867,3.6-13.467,0l-37.038-37.038l13.467-13.467l37.038,37.038     c1.8,1.8,2.79,4.19,2.79,6.733C285.714,278.733,284.724,281.124,282.924,282.924z" />
-                                            <path d="M188.538,47.581c-4.867-4.138-10.162-7.829-15.729-10.967l-4.676,8.295c5.043,2.843,9.829,6.181,14.238,9.924     L188.538,47.581z" />
-                                            <path d="M212.4,77.381c-2.971-5.652-6.505-11.048-10.51-16.048l-7.433,5.952c3.624,4.524,6.824,9.414,9.505,14.524L212.4,77.381z     " />
-                                            <path d="M155.257,28.857c-6.067-2.01-12.362-3.438-18.714-4.248l-1.2,9.448c5.743,0.729,11.433,2.024,16.919,3.838     L155.257,28.857z" />
-                                            <path d="M213.852,114.901l9.476-0.919c-0.619-6.371-1.862-12.705-3.686-18.829l-9.124,2.724     C212.171,103.41,213.29,109.139,213.852,114.901z" />
-                                            <path d="M84.576,42.263l-4.129-8.586c-5.748,2.767-11.267,6.114-16.4,9.948l5.7,7.638C74.386,47.79,79.381,44.763,84.576,42.263z     " />
-                                            <path d="M54.019,195.43c4.595,4.471,9.624,8.514,14.952,12.01l5.229-7.962c-4.824-3.162-9.376-6.824-13.529-10.867L54.019,195.43     z" />
-                                            <path d="M85.938,216.386c5.919,2.424,12.1,4.276,18.371,5.519l1.843-9.348c-5.667-1.114-11.252-2.795-16.605-4.99L85.938,216.386     z" />
-                                            <path d="M117.981,33.519l-0.595-9.505c-6.386,0.405-12.757,1.424-18.938,3.038l2.41,9.219     C106.448,34.811,112.205,33.881,117.981,33.519z" />
-                                            <path d="M32.243,164.071c2.576,5.852,5.733,11.481,9.386,16.733l7.824-5.433c-3.3-4.752-6.162-9.848-8.49-15.143L32.243,164.071z     " />
-                                            <path d="M56.881,62.92l-7.043-6.41c-4.31,4.733-8.181,9.895-11.5,15.348l8.138,4.957C49.486,71.881,52.981,67.206,56.881,62.92z" />
-                                            <path d="M33.376,126.534l-9.524,0.281c0.19,6.41,0.99,12.81,2.39,19.029l9.29-2.09C34.267,138.129,33.543,132.339,33.376,126.534     z" />
-                                            <path d="M38.919,92.433l-8.929-3.3c-2.214,5.981-3.862,12.219-4.886,18.552l9.405,1.524     C35.433,103.487,36.919,97.844,38.919,92.433z" />
-                                        </g>
-                                    </g>
-                                </g>
-                            </svg>
-                        </span>
-                        <span class="text-xl font-semibold sm:text-2xl text-rose-900">Vizsgadíjak</span>
-                    </div>
-                    <div class="flex flex-col w-full divide-y-2 divide-gray-300">
-                        <div class="flex flex-col md:gap-2 sm:flex-row">
-                            <span>KRESZ vizsga</span>
-                            <span class="flex-1 font-semibold text-rose-900 sm:text-right">4600 Ft</span>
-                        </div>
-                        <div class="flex flex-col sm:items-center sm:flex-row sm:gap-2">
-                            <span>Forgalmi vizsga</span>
-                            <span class="flex-1 font-semibold sm:text-right text-rose-900">11.000 Ft</span>
-                        </div>
-                    </div>
-                </div>
+  <section class="flex justify-center py-4 bg-emerald-200">
+    <div class="w-9/10 lg:w-4/5 lg:min-w-[63rem] flex gap-4 flex-col lg:flex-row">
+      <div class="flex-1 px-2 py-1 border-2 rounded-md bg-emerald-100 border-emerald-300">
+        <h2 class="text-lg sm:text-xl">Gyakorlati vezetés</h2>
+        <ul class="list-(--hypen) [--hypen:'- '] list-inside">
+          <li>A sikeres KRESZ vizsgától számított 2 éven belül</li>
+          <li>min. <span class="font-semibold">30 óra és 580 km</span> szükséges a sikeres vizsgához.</li>
+        </ul>
+      </div>
+      <div class="flex-1 px-2 py-1 border-2 rounded-md bg-emerald-100 border-emerald-300">
+        <h2 class="text-lg sm:text-xl">Tantermi elméleti oktatás helyszíne</h2>
+        <p><a href="https://maps.app.goo.gl/R32vtZzeT1ULby6k9" class="text-purple-600 underline underline-offset-5 decoration-purple-600">1148 Budapest Bánki Donát park 1.</a></p>
+      </div>
+    </div>
+  </section>
+  <section class="flex justify-center py-4 bg-cyan-100">
+    <div class="w-9/10 lg:w-4/5 lg:min-w-[63rem]">
+      <h2 class="inline-block pb-0.75 mb-3 text-2xl font-bold sm:text-3xl bg-gradient-to-r from-sky-500 to-purple-500 text-sky-800">
+        <span class="block pb-1 bg-cyan-100">Tandíjak és vizsgadíjak</span>
+      </h2>
+      <div class="flex flex-col w-full gap-4 text-lg lg:flex-row">
+        <div class="flex-1 p-2 border-4 rounded-lg bg-gradient-to-br from-white to-sky-200 border-emerald-400">
+          <div class="flex items-center gap-2 mb-2">
+            <span class="inline-block size-10 sm:size-12 p-2 rounded-full sliding-bg [--time:3s] [--angle:135deg] [--bg-1:var(--color-sky-900)] [--bg-2:var(--color-sky-600)]">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -16.04 72.617 72.617" class="fill-white">
+                <g id="Group_58" data-name="Group 58" transform="translate(-621.208 -934.226)">
+                  <g id="Group_57" data-name="Group 57">
+                    <path id="Path_48" data-name="Path 48" d="M688.461,944.951a191.915,191.915,0,0,0-11.136-10.725h-50.3a5.823,5.823,0,0,0-5.817,5.816v18.223A192.8,192.8,0,0,0,631.935,969.4a6.063,6.063,0,0,0,6.014,5.364h49.819a6.064,6.064,0,0,0,6.057-6.057V950.965A6.063,6.063,0,0,0,688.461,944.951Zm-64.253,13.314V940.042a2.82,2.82,0,0,1,2.817-2.816h50.3a2.815,2.815,0,0,1,2.769,2.341H632.367a5.824,5.824,0,0,0-5.817,5.817v15.649A2.816,2.816,0,0,1,624.208,958.265Zm5.342,5.341V945.384a2.821,2.821,0,0,1,2.817-2.817h50.3a2.816,2.816,0,0,1,2.769,2.341H637.949a6.064,6.064,0,0,0-6.057,6.057v15.41A2.815,2.815,0,0,1,629.55,963.606Zm61.275,5.1a3.061,3.061,0,0,1-3.057,3.057H637.949a3.06,3.06,0,0,1-3.057-3.057V950.965a3.06,3.06,0,0,1,3.057-3.057h49.819a3.061,3.061,0,0,1,3.057,3.057Z" />
+                    <path id="Path_49" data-name="Path 49" d="M662.858,950c-4.952,0-8.981,4.411-8.981,9.834s4.029,9.833,8.981,9.833,8.981-4.411,8.981-9.833S667.81,950,662.858,950Zm0,16.667c-3.3,0-5.981-3.066-5.981-6.833S659.56,953,662.858,953s5.981,3.065,5.981,6.834S666.156,966.67,662.858,966.67Z" />
+                    <path id="Path_50" data-name="Path 50" d="M681.352,954.732a5.1,5.1,0,1,0,5.1,5.1A5.111,5.111,0,0,0,681.352,954.732Zm0,7.208a2.1,2.1,0,1,1,2.1-2.1A2.107,2.107,0,0,1,681.352,961.94Z" />
+                    <path id="Path_51" data-name="Path 51" d="M644.717,954.732a5.1,5.1,0,1,0,5.1,5.1A5.11,5.11,0,0,0,644.717,954.732Zm0,7.208a2.1,2.1,0,1,1,2.1-2.1A2.1,2.1,0,0,1,644.717,961.94Z" />
+                  </g>
+                  <path id="Path_52" data-name="Path 52" d="M662.531,962.846c-1.6-.11-2.423-.94-2.478-2.184h1.833a.8.8,0,0,0,.645.784v-1.2c-1.686-.23-2.349-.811-2.349-2.1,0-1.151.884-1.962,2.349-2.063v-.82h.746v.829c1.373.11,2.193.728,2.294,2.027h-1.8a.64.64,0,0,0-.5-.627v1.133c1.428.194,2.386.664,2.386,2.009,0,1.152-.718,2.1-2.386,2.211V964h-.746Zm0-4.321v-1.059c-.378.064-.571.258-.571.525C661.96,958.286,662.107,958.433,662.531,958.525Zm.746,1.852v1.087c.378-.083.553-.295.553-.58C663.83,960.617,663.692,960.478,663.277,960.377Z" />
+                </g>
+              </svg>
+            </span>
+            <span class="text-xl font-semibold sm:text-2xl text-sky-900">Tandíjak</span>
+          </div>
+          <div class="flex flex-col w-full divide-y-2 divide-gray-300">
+            <div class="flex flex-col sm:flex-row sm:gap-2">
+              <span>Elméleti képzés (E-learning)</span>
+              <span class="flex-1 font-semibold sm:text-right text-sky-900">45.000 Ft</span>
             </div>
+            <div class="flex flex-col sm:items-center sm:flex-row sm:gap-2">
+              <span>Gyakorlati képzés</span>
+              <div class="flex flex-col flex-1 gap-1 sm:text-right">
+                <span class="font-semibold text-sky-900 ">Manuális v. autó: 9500 Ft / tanóra</span>
+                <span class="font-semibold text-sky-900 ">Automata v. autó: 10.000 Ft / tanóra</span>
+              </div>
+            </div>
+            <div class="flex flex-col sm:items-center sm:flex-row sm:gap-2">
+              <span>Teljes képzés esetén</span>
+              <div class="flex flex-col flex-1 gap-1 sm:text-right">
+                <span class="font-semibold text-sky-900 ">Gyakorlati képzés: 285.000 Ft-tól / 29 tanóra</span>
+                <span class="font-semibold text-sky-900 ">A képzés díja: 330.000 Ft-tól + vizsgaóra és vizsgadíj</span>
+              </div>
+            </div>
+          </div>
         </div>
-    </section>
+        <div class="flex-1 p-2 border-4 rounded-lg border-emerald-400 bg-gradient-to-br from-white to-rose-200">
+          <div class="flex items-center gap-2 mb-2">
+            <span class="inline-block size-10 sm:size-12 p-2 rounded-full sliding-bg [--time:3s] [--angle:135deg] [--bg-1:var(--color-rose-900)] [--bg-2:var(--color-rose-600)]">
+              <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="Layer_1" viewBox="0 0 295.24 295.24" xml:space="preserve" class="fill-white">
+                <g>
+                  <g>
+                    <g>
+                      <path d="M171.429,133.334c-23.633,0-42.857,19.224-42.857,42.857s19.224,42.857,42.857,42.857s42.857-19.224,42.857-42.857     S195.062,133.334,171.429,133.334z M171.429,209.524c-18.376,0-33.333-14.957-33.333-33.333     c0-18.376,14.957-33.333,33.333-33.333c18.376,0,33.333,14.957,33.333,33.333C204.762,194.568,189.805,209.524,171.429,209.524z" />
+                      <path d="M289.657,262.724l-37.21-37.21c1.281-1.929,1.976-4.19,1.976-6.562c0-3.186-1.243-6.176-3.486-8.419     c-4.067-4.067-10.362-4.567-14.981-1.514l-7.905-7.905c2.619-5.924,4.348-12.314,4.986-19.029     c9.524-17.833,14.581-37.948,14.581-58.276C247.619,55.539,192.081,0.001,123.81,0.001S0,55.539,0,123.811     s55.538,123.81,123.81,123.81c16.495,0,32.5-4.762,47.605-9.524c0.005,0,0.01,0,0.014,0c11.386,0,22.024-3.143,31.2-8.529     l6.39,6.386c-3.052,4.619-2.552,10.914,1.51,14.976c2.248,2.252,5.238,3.49,8.424,3.49c2.371,0,4.633-0.69,6.562-1.976     l37.21,37.21c3.595,3.605,8.381,5.586,13.467,5.586s9.871-1.981,13.467-5.581c3.6-3.595,5.581-8.381,5.581-13.467     C295.238,271.105,293.257,266.319,289.657,262.724z M123.81,238.095c-63.014,0-114.286-51.271-114.286-114.286     S60.795,9.524,123.81,9.524s114.285,51.271,114.285,114.286c0,12.962-2.262,25.81-6.529,37.952     c-1.819-7.581-5.005-14.633-9.338-20.848c0.448-2.586,0.886-5.176,1.129-7.738l-8.238-0.79     c-11.205-11.176-26.652-18.1-43.69-18.1c-8.957,0-17.457,1.952-25.148,5.39c-1.957-0.376-3.905-0.629-5.805-0.629H123.81h-16.667     c-11.814,0-21.429-9.614-21.429-21.429s9.614-21.429,21.429-21.429h33.333c11.814,0,21.429,9.614,21.429,21.429v7.143h9.524     v-7.143c0-17.067-13.886-30.952-30.952-30.952h-11.905V47.62h-9.524v19.048h-11.905c-17.067,0-30.952,13.886-30.952,30.952     c0,17.066,13.886,30.952,30.952,30.952h16.667h8.119c-9.419,7.824-16.448,18.4-19.938,30.462     c-0.062,0.21-0.105,0.424-0.162,0.633c-0.467,1.681-0.886,3.386-1.21,5.119c-0.124,0.662-0.2,1.333-0.305,2     c-0.2,1.31-0.4,2.614-0.514,3.948c-0.019,0.233-0.071,0.457-0.09,0.69h-2.567c-11.814,0-21.429-9.614-21.429-21.429v-7.138H76.19     v7.144c0,17.067,13.886,30.952,30.952,30.952h2.624c1.005,13.086,6.033,25.057,13.933,34.614l0.11,8.243     c2.533,0,5.105-0.133,7.748-0.338c5.81,4.905,12.533,8.733,19.876,11.248C142.457,236.949,133.219,238.095,123.81,238.095z      M171.429,228.571c-28.881,0-52.381-23.5-52.381-52.381c0-1.567,0.1-3.11,0.233-4.643c0.048-0.552,0.114-1.1,0.181-1.648     c0.114-0.952,0.267-1.895,0.433-2.833c0.529-2.929,1.286-5.8,2.295-8.576c0.086-0.229,0.167-0.462,0.252-0.69     c2.967-7.824,7.781-14.876,14.024-20.51c0.081-0.071,0.162-0.148,0.243-0.224c0.867-0.771,1.757-1.514,2.676-2.229     c0.076-0.057,0.152-0.114,0.229-0.171c2.771-2.129,5.776-3.995,8.981-5.552c6.919-3.362,14.643-5.305,22.833-5.305     c28.881,0,52.381,23.5,52.381,52.381C223.809,205.071,200.31,228.571,171.429,228.571z M210.604,224.073     c4.939-4.048,9.215-8.858,12.71-14.229l5.738,5.738l-13.467,13.467L210.604,224.073z M220.639,244.205     c-0.61,0.61-1.314,0.695-1.686,0.695s-1.077-0.09-1.686-0.7c-0.924-0.929-0.924-2.438,0-3.367l23.567-23.567     c0.467-0.467,1.076-0.695,1.686-0.695s1.219,0.238,1.686,0.7c0.605,0.605,0.695,1.31,0.695,1.681c0,0.371-0.09,1.076-0.695,1.686     L220.639,244.205z M282.924,282.924c-3.6,3.6-9.867,3.6-13.467,0l-37.038-37.038l13.467-13.467l37.038,37.038     c1.8,1.8,2.79,4.19,2.79,6.733C285.714,278.733,284.724,281.124,282.924,282.924z" />
+                      <path d="M188.538,47.581c-4.867-4.138-10.162-7.829-15.729-10.967l-4.676,8.295c5.043,2.843,9.829,6.181,14.238,9.924     L188.538,47.581z" />
+                      <path d="M212.4,77.381c-2.971-5.652-6.505-11.048-10.51-16.048l-7.433,5.952c3.624,4.524,6.824,9.414,9.505,14.524L212.4,77.381z     " />
+                      <path d="M155.257,28.857c-6.067-2.01-12.362-3.438-18.714-4.248l-1.2,9.448c5.743,0.729,11.433,2.024,16.919,3.838     L155.257,28.857z" />
+                      <path d="M213.852,114.901l9.476-0.919c-0.619-6.371-1.862-12.705-3.686-18.829l-9.124,2.724     C212.171,103.41,213.29,109.139,213.852,114.901z" />
+                      <path d="M84.576,42.263l-4.129-8.586c-5.748,2.767-11.267,6.114-16.4,9.948l5.7,7.638C74.386,47.79,79.381,44.763,84.576,42.263z     " />
+                      <path d="M54.019,195.43c4.595,4.471,9.624,8.514,14.952,12.01l5.229-7.962c-4.824-3.162-9.376-6.824-13.529-10.867L54.019,195.43     z" />
+                      <path d="M85.938,216.386c5.919,2.424,12.1,4.276,18.371,5.519l1.843-9.348c-5.667-1.114-11.252-2.795-16.605-4.99L85.938,216.386     z" />
+                      <path d="M117.981,33.519l-0.595-9.505c-6.386,0.405-12.757,1.424-18.938,3.038l2.41,9.219     C106.448,34.811,112.205,33.881,117.981,33.519z" />
+                      <path d="M32.243,164.071c2.576,5.852,5.733,11.481,9.386,16.733l7.824-5.433c-3.3-4.752-6.162-9.848-8.49-15.143L32.243,164.071z     " />
+                      <path d="M56.881,62.92l-7.043-6.41c-4.31,4.733-8.181,9.895-11.5,15.348l8.138,4.957C49.486,71.881,52.981,67.206,56.881,62.92z" />
+                      <path d="M33.376,126.534l-9.524,0.281c0.19,6.41,0.99,12.81,2.39,19.029l9.29-2.09C34.267,138.129,33.543,132.339,33.376,126.534     z" />
+                      <path d="M38.919,92.433l-8.929-3.3c-2.214,5.981-3.862,12.219-4.886,18.552l9.405,1.524     C35.433,103.487,36.919,97.844,38.919,92.433z" />
+                    </g>
+                  </g>
+                </g>
+              </svg>
+            </span>
+            <span class="text-xl font-semibold sm:text-2xl text-rose-900">Vizsgadíjak</span>
+          </div>
+          <div class="flex flex-col w-full divide-y-2 divide-gray-300">
+            <div class="flex flex-col md:gap-2 sm:flex-row">
+              <span>KRESZ vizsga</span>
+              <span class="flex-1 font-semibold text-rose-900 sm:text-right">4600 Ft</span>
+            </div>
+            <div class="flex flex-col sm:items-center sm:flex-row sm:gap-2">
+              <span>Forgalmi vizsga</span>
+              <span class="flex-1 font-semibold sm:text-right text-rose-900">11.000 Ft</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <h3 class="inline-block my-2 pb-0.5 text-lg sm:text-xl font-medium bg-gradient-to-r from-sky-700 to-purple-700 text-sky-900">
+        <span class="block pb-0.5 bg-cyan-100">Gyakorlati képzés részletek</span>
+      </h3>
+      <ul class="list-(--hypen) [--hypen:'- '] bg-emerald-100 rounded-sm [&>*]:my-0.5 px-2 list-inside py-0.5">
+        <li>Alapoktatás 9 óra</li>
+        <li>Főoktatás a 20 óra</li>
+        <li>Ha valaki az elméleti tanfolyamot máshol végezte el:
+          <ul class="ml-4 list-inside list-(--arrow) [--arrow:'> ']">
+            <li>8.000 Ft regisztrációs díjat számolunk fel</li>
+            <li>az óradíj: alapdíj (manuális, automata) + 500 Ft</li>
+          </ul>
+        </li>
+      </ul>
+      <h3 class="inline-block my-2 pb-0.5 text-lg sm:text-xl font-medium bg-gradient-to-r from-sky-700 to-purple-700 text-sky-900">
+        <span class="block pb-0.5 bg-cyan-100">Vizsga részletek</span>
+      </h3>
+      <ul class="list-(--hypen) [--hypen:'- '] bg-emerald-100 rounded-sm [&>*]:my-0.5 px-2 list-inside py-0.5">
+        <li>Elmélet: közlekedési alapismeretek vizsga, díja: 4.600 Ft vizsgadíj + 400 Ft ügyintézési díj</li>
+        <li>Gyakorlat: forgalmi vizsga, óradíj (manuális, automata) + 11.000 Ft vizsgadíj + 500 Ft ügyintézési díj</li>
+      </ul>
+      <h3 class="inline-block my-2 pb-0.5 text-lg sm:text-xl font-medium bg-gradient-to-r from-sky-700 to-purple-700 text-sky-900">
+        <span class="block pb-0.5 bg-cyan-100">Tandíj fizetés</span>
+      </h3>
+      <ul class="list-(--hypen) [--hypen:'- '] bg-emerald-100 rounded-sm [&>*]:my-0.5 px-2 list-inside py-0.5">
+        <li>Tandíj fiztés módja: Az iskolavezetőnél, vagy átutalással</li>
+        <li>Bankszámlaszám: OTP
+          <span class="px-1 break-all transition-colors border-2 rounded-sm cursor-pointer border-slate-400 bg-slate-200 copy-wrap">
+            <span class="copy-content">11714006-25989393</span>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" class="inline-block -mt-1 icon size-7 fill-slate-700" version="1.1">
+              <path d="M589.3 260.9v30H371.4v-30H268.9v513h117.2v-304l109.7-99.1h202.1V260.9z" fill="#E1F0FF" />
+              <path d="M516.1 371.1l-122.9 99.8v346.8h370.4V371.1z" fill="#E1F0FF" />
+              <path d="M752.7 370.8h21.8v435.8h-21.8z" />
+              <path d="M495.8 370.8h277.3v21.8H495.8z" />
+              <path d="M495.8 370.8h21.8v124.3h-21.8z" />
+              <path d="M397.7 488.7l-15.4-15.4 113.5-102.5 15.4 15.4z" />
+              <path d="M382.3 473.3h135.3v21.8H382.3z" />
+              <path d="M382.3 479.7h21.8v348.6h-21.8zM404.1 806.6h370.4v21.8H404.1z" />
+              <path d="M447.7 545.1h261.5v21.8H447.7zM447.7 610.5h261.5v21.8H447.7zM447.7 675.8h261.5v21.8H447.7z" />
+              <path d="M251.6 763h130.7v21.8H251.6z" />
+              <path d="M251.6 240.1h21.8v544.7h-21.8zM687.3 240.1h21.8v130.7h-21.8zM273.4 240.1h108.9v21.8H273.4z" />
+              <path d="M578.4 240.1h130.7v21.8H578.4zM360.5 196.5h21.8v108.9h-21.8zM382.3 283.7h196.1v21.8H382.3zM534.8 196.5h65.4v21.8h-65.4z" />
+              <path d="M360.5 196.5h65.4v21.8h-65.4zM404.1 174.7h152.5v21.8H404.1zM578.4 196.5h21.8v108.9h-21.8z" />
+            </svg>
+          </span>
+        </li>
+        <li>Kedvezményezett:
+          <span class="px-1 break-all transition-colors border-2 rounded-sm cursor-pointer border-slate-400 bg-slate-200 copy-wrap">
+            <span class="copy-content">CSÚCSPLUSZ Bt.</span>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" class="inline-block -mt-1 icon size-7 fill-slate-700" version="1.1">
+              <path d="M589.3 260.9v30H371.4v-30H268.9v513h117.2v-304l109.7-99.1h202.1V260.9z" fill="#E1F0FF" />
+              <path d="M516.1 371.1l-122.9 99.8v346.8h370.4V371.1z" fill="#E1F0FF" />
+              <path d="M752.7 370.8h21.8v435.8h-21.8z" />
+              <path d="M495.8 370.8h277.3v21.8H495.8z" />
+              <path d="M495.8 370.8h21.8v124.3h-21.8z" />
+              <path d="M397.7 488.7l-15.4-15.4 113.5-102.5 15.4 15.4z" />
+              <path d="M382.3 473.3h135.3v21.8H382.3z" />
+              <path d="M382.3 479.7h21.8v348.6h-21.8zM404.1 806.6h370.4v21.8H404.1z" />
+              <path d="M447.7 545.1h261.5v21.8H447.7zM447.7 610.5h261.5v21.8H447.7zM447.7 675.8h261.5v21.8H447.7z" />
+              <path d="M251.6 763h130.7v21.8H251.6z" />
+              <path d="M251.6 240.1h21.8v544.7h-21.8zM687.3 240.1h21.8v130.7h-21.8zM273.4 240.1h108.9v21.8H273.4z" />
+              <path d="M578.4 240.1h130.7v21.8H578.4zM360.5 196.5h21.8v108.9h-21.8zM382.3 283.7h196.1v21.8H382.3zM534.8 196.5h65.4v21.8h-65.4z" />
+              <path d="M360.5 196.5h65.4v21.8h-65.4zM404.1 174.7h152.5v21.8H404.1zM578.4 196.5h21.8v108.9h-21.8z" />
+            </svg>
+          </span>
+        </li>
+        <li>Közlemény: a befizető neve</li>
+      </ul>
+    </div>
+  </section>
+  <section class="flex justify-center py-4">
+    <div class="w-9/10 lg:w-4/5 lg:min-w-[63rem]">
+      <h2 class="inline-block mb-3 text-2xl sm:text-3xl font-bold pb-0.75 bg-gradient-to-r from-cyan-500 to-violet-500 text-cyan-800">
+        <span class="block pb-1 bg-sky-200">A tanfolyamra jelentkezés feltételei</span>
+      </h2>
+      <ul class="list-(--hypen) [--hypen:'- '] bg-teal-100 rounded-sm [&>*]:my-0.5 px-2 list-inside py-0.5">
+        <li>A 16 és 1/2 éves korhatár betöltése.</li>
+        <li>Alapfokú iskolai végzettség (8 osztály) meglétének igazolása.</li>
+        <li>Jelentkezési lap kitöltése.</li>
+        <li>Felnőttképzési szerződés megkötése. Ha a jelentkező 18 évnél fiatalabb, az autósiskolával kötött szerződést a szülővel, törvényes képviselővel is alá kell íratnia.</li>
+        <li>Ha valamely más kategóriából már rendelkezik vezetői engedéllyel, akkor a vezetői engedély másolatának benyújtása.</li>
+        <li>Orvosi alkalmasságról szóló igazolás (háziorvos, legalább 1. csoportú) leadása. (Ha még nem rendelkezik vezetői engedéllyel.)</li>
+        <li>Az elméleti tanfolyamdíj befizetése.</li>
+      </ul>
+    </div>
+  </section>
+  <section class="flex justify-center py-4 bg-cyan-100">
+    <div class="w-9/10 lg:w-4/5 lg:min-w-[63rem]">
+      <h2 class="inline-block pb-0.75 mb-3 text-2xl font-bold sm:text-3xl bg-gradient-to-r from-sky-500 to-purple-500 text-sky-800">
+        <span class="block pb-1 bg-cyan-100">Vizsgára bocsátás feltételei</span>
+      </h2>
+      <ul class="list-(--hypen) [--hypen:'- '] bg-emerald-100 rounded-sm [&>*]:my-0.5 px-2 list-inside py-0.5">
+        <li>Vizsgára bocsátható az a tanuló, aki az elméleti tanfolyamot elvégezte.</li>
+        <li>Elméleti vizsga a 17 életév betöltése előtt 3 hónappal tehető. Az első sikeres elméleti vizsga után két éven belül valamennyi tárgyból sikeres vizsgát kell tenni.</li>
+        <li>Forgalmi vizsgára az bocsátható, aki a 17. életévét betöltötte sikeres elméleti vizsgával rendelkezik, és a kötelezően előírt feladatokat teljesítette.</li>
+        <li>A vezetői engedély intézését a sikeres vizsga utáni 4. munkanapon személyesen (vagy hivatalos meghatalmazással) lehet intézni a kormányablaknál személyi igazolvány és a Közúti-elsősegélynyújtás vizsgát igazoló lap, és az orvosi alkalmassági felmutatásával.</li>
+      </ul>
+    </div>
+  </section>
+  <section class="flex justify-center py-4">
+    <div class="w-9/10 lg:w-4/5 lg:min-w-[63rem]">
+      <h2 class="inline-block mb-3 text-2xl sm:text-3xl font-bold pb-0.75 bg-gradient-to-r from-cyan-500 to-violet-500 text-cyan-800">
+        <span class="block pb-1 bg-sky-200">Első jogosítvány</span>
+      </h2>
+      <p class="bg-teal-100">A vezetői jogosultság első alkalommal történő megszerzésénél kezdő vezetői engedély kerül kiadásra, amely a 18. életév betöltéséig csak belföldi közlekedésre jogosít, és amellyel pótkocsi nem vontatható.</p>
+    </div>
+  </section>
+  <script>
+    const copyWraps = document.querySelectorAll('.copy-wrap')
+    for (const copyWrap of copyWraps) {
+      copyWrap.addEventListener('click', () => {
+        navigator.clipboard.writeText(copyWrap.querySelector('.copy-content').textContent)
+        copyWrap.style = 'background: lightgreen; border-color: green'
+        setTimeout(() => copyWrap.style = '', 300)
+      })
+    }
+  </script>
 </main>
 <?php include "footer.php" ?>

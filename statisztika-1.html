@@ -1,0 +1,19 @@
+<section class="flex justify-center py-4">
+    <div class="w-9/10 lg:w-4/5 lg:min-w-[63rem] flex flex-col gap-2">
+      <h1 class="text-xl">Képzési Mutatók</h1>
+      <div><span class="font-semibold">ÁKO:</span> [get_stat stat="ako" postfix=" óra"]</div>
+      <div class="font-semibold">VSM:</div>
+      <div>
+        <div class="font-semibold">E:</div>
+        <div class="flex flex-col gap-2 my-1">
+          [get_stat_list stat_list="e_json"]
+        </div>
+      </div>
+      <div>
+        <div class="font-semibold">GY:</div>
+        <div class="flex flex-col gap-2 my-1">
+          [get_stat_list stat_list="gy_json"]
+        </div>
+      </div>
+      <div><span class="font-semibold">KK:</span> [get_stat_ar stat_ar="kk"]</div>
+  </section>

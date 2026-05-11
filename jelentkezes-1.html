@@ -1,0 +1,54 @@
+<style>
+form br { display: none }
+</style>
+<section class="flex flex-col items-center gap-4 py-4 m-auto w-9/10 sm:w-auto">
+  <h1 class="text-xl md:text-2xl font-medium text-center text-border-light text-indigo-600 [--text-border-color:var(--color-teal-300)]">Az alábbi adatlapot kitöltve tud jelentkezni tanfolyamunkra.</h1>
+  [jelentkezési lap]
+</section>
+<script>
+  function checkIsInputValid(controlDiv, input) {
+    const cl = controlDiv.classList
+    const valueInputTypes = ['text', 'file', 'date', 'email', 'tel']
+    if (
+      input.tagName === 'INPUT' && valueInputTypes.includes(input.type) && input.value === '' ||
+      input.tagName === 'SELECT' && input.value === '' ||
+      input.tagName === 'TEXTAREA' && input.innerText === '' ||
+      input.type === 'radio' && controlDiv.querySelectorAll('input[type=radio]:checked').length === 0
+    ) {
+      cl.remove('valid-control')
+      cl.add('invalid-control')
+    }
+    else {
+      cl.remove('invalid-control')
+      cl.add('valid-control')
+    }
+  }
+
+  const inputTypes = ['text', 'select', 'textarea', 'date', 'file']
+  const querySelector = inputTypes.map(type => `.wpcf7-${type}.wpcf7-validates-as-required`).join(', ')
+  document.querySelectorAll(querySelector).forEach(input => {
+    let parent = input.parentElement
+    while (!parent.classList.contains('control-div')) {
+      parent = parent.parentElement
+    }
+
+    parent.classList.remove('border-slate-500')
+    checkIsInputValid(parent, input)
+    input.addEventListener('input', () => {
+      checkIsInputValid(parent, input)
+    })
+  })
+
+  document.querySelectorAll('input[type=radio]').forEach(radio => {
+    let parent = radio.parentElement
+    while (!parent.classList.contains('control-div')) {
+      parent = parent.parentElement
+    }
+
+    parent.classList.remove('border-slate-500')
+    checkIsInputValid(parent, radio)
+    radio.addEventListener('change', () => {
+      checkIsInputValid(parent, radio)
+    })
+  })
+</script>
