@@ -27,29 +27,27 @@ add_action('admin_menu', function () {
 
 add_action('admin_init', function () {
   if (
-    isset($_POST['training_form_nonce']) &&
-    wp_verify_nonce($_POST['training_form_nonce'], 'training_form_action') &&
+    isset($_POST['course_page_form_nonce']) &&
+    wp_verify_nonce($_POST['course_page_form_nonce'], 'course_page_form_action') &&
     current_user_can('manage_options') &&
-    isset($_POST['trainings_json'])
+    isset($_POST['course_page_json'])
   ) {
-    $json = str_replace('\"', '"', $_POST['trainings_json']);
+    $json = wp_unslash($_POST['course_page_json']);
     $data = json_decode($json);
-    $trainings = $data->trainings;
-    /** @var Training $t */
-    foreach ($trainings as $training) {
-      $training->name = sanitize_text_field($training->name);
-      $training->description = sanitize_textarea_field($training->description);
-      $option_name = normalize_option_name($training->name) . '_training_start';
-      if ($training->hasStartDate) {
-        update_option($option_name, $training->startDate);
-      }
-      else {
-        delete_option($option_name);
+    $sectionGroups = (array)$data;
+    foreach ($sectionGroups as $sectionGroup) {
+      foreach ($sectionGroup as $section) {
+        $section->name = sanitize_text_field($section->name);
       }
     }
 
-    $data->noTrainingStartText = sanitize_text_field($data->noTrainingStartText);
-    update_option('trainings_json', json_encode($data));
+    foreach ($data->sections as $section) {
+      foreach ($section->subSections as $subSection) {
+        $subSection->name = sanitize_text_field($subSection->name);
+      }
+    }
+
+    update_option('course_page_json', json_encode($data));
     add_action('admin_notices', function () {
       echo '
         <div class="notice notice-success is-dismissible">

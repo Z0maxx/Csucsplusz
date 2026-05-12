@@ -40,19 +40,12 @@ add_action('admin_init', function () {
     current_user_can('manage_options') &&
     isset($_POST['trainings_json'])
   ) {
-    $json = str_replace('\"', '"', $_POST['trainings_json']);
+    $json = wp_unslash($_POST['trainings_json']);
     $data = json_decode($json);
     $trainings = $data->trainings;
     /** @var Training $t */
     foreach ($trainings as $training) {
       $training->name = sanitize_text_field($training->name);
-      $option_name = normalize_option_name($training->name) . '_training_start';
-      if ($training->hasStartDate) {
-        update_option($option_name, $training->startDate);
-      }
-      else {
-        delete_option($option_name);
-      }
     }
 
     $data->noTrainingStartText = sanitize_text_field($data->noTrainingStartText);

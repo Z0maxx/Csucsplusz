@@ -9,6 +9,7 @@
     opacity: 0;
   }
 }
+
 @keyframes fade-in {
   from {
     opacity: 0;
@@ -16,11 +17,31 @@
 }
 
 ul {
-  @apply list-disc list-inside
+  @apply list-inside [&>*]:my-0.5 px-2 py-0.5
 }
 
 ol {
-  @apply list-decimal list-inside
+  @apply list-decimal list-inside [&>*]:my-0.5 px-2 py-0.5
+}
+
+ul li::marker {
+  content: '- '
+}
+
+li ul li::marker {
+  content: '> '
+}
+
+li ul li ul li::marker {
+  content: '* '
+}
+
+li ul {
+  @apply ml-4;
+}
+
+b {
+  @apply font-medium
 }
 
 main {
@@ -190,6 +211,10 @@ main {
     }
 }
 
+.copy-content {
+  @apply px-1 break-all transition-colors border-2 rounded-sm cursor-pointer border-slate-400 bg-slate-200;
+}
+
 .text-border {
     text-shadow:
         -1px -1px var(--text-border-color),
@@ -223,6 +248,26 @@ main {
 .rotating-bg {
     animation: gradient-angle var(--time) linear infinite;
     background-image: linear-gradient(var(--gradient-angle), var(--bg-1), var(--bg-2));
+}
+
+.wpcf7-form {
+  @apply flex flex-col w-full gap-4 p-2 border-2 md:p-4 sm:w-fit border-sky-300 bg-sky-200 rounded-xl;
+}
+
+.wpcf7-form button[type=submit] {
+  @apply w-full py-2 text-lg md:text-xl font-bold transition border-2 rounded-md shadow-xl cursor-pointer text-cyan-800 bg-emerald-200 border-emerald-400 hover:shadow-green-500/40 focus:shadow-green-500/40 focus:[&>span]:scale-110 hover:[&>span]:scale-110
+}
+
+.wpcf7-form button[type=submit] span {
+  @apply block transition
+}
+
+.control-div.valid-control {
+  @apply border-green-500
+}
+
+.control-div.invalid-control {
+  @apply border-amber-500
 }
 
 .wpcf7-radio label {
@@ -285,6 +330,22 @@ main {
   @apply [&>li]:my-4 [&>li]:[&>span]:bg-[var(--list-color)] [&>li]:[&>span]:px-1 [&>li]:[&>span]:py-0.5 [&>li]:[&>span]:rounded-md [&>li]:[&>span]:font-semibold;
 }
 
+.training {
+  @apply px-2 py-1 text-lg border-2 rounded-md bg-emerald-100 border-emerald-300;
+}
+
+.training-header {
+  @apply font-medium text-xl mb-1
+}
+
+.training-start-date {
+  @apply text-white bg-lime-600 px-1.5 py-0.5 rounded-sm w-fit font-medium my-1;
+}
+
+.training-no-start-date {
+  @apply font-medium text-blue-700;
+}
+
 .instructor {
   @apply flex flex-col w-full;
 }
@@ -313,18 +374,10 @@ main {
   @apply font-medium bg-teal-100 rounded-xl;
 }
 
-.wpcf7-form {
-  @apply flex flex-col w-full gap-4 p-2 border-2 md:p-4 sm:w-fit border-cyan-300 bg-cyan-100 rounded-xl;
-}
-
-.valid-control {
-  @apply border-green-500
-}
-
-.invalid-control {
-  @apply border-amber-500
-}
-
 .grecaptcha-badge {
   display: none !important;
+}
+
+#tinymce {
+  @apply p-1
 }

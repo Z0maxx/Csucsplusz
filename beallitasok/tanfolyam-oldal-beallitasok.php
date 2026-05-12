@@ -1,4 +1,25 @@
 <style>
+  iframe {
+    width: 100%;
+  }
+
+  ul li::marker {
+    content: '- '
+  }
+
+  li ul li::marker {
+    content: '> '
+  }
+
+  li ul li ul li::marker {
+    content: '* '
+  }
+
+  table {
+    table-layout: fixed;
+    max-width: 1350px;
+  }
+
   tbody tr:nth-child(odd) {
     background-color: lightgray
   }
@@ -9,8 +30,22 @@
 
   th:first-child,
   td:first-child {
-    width: 20px !important;
-    max-width: 20px
+    width: 30px;
+  }
+
+  th:nth-child(2),
+  td:nth-child(2) {
+    width: 320px
+  }
+
+  th:nth-child(3),
+  td:nth-child(3) {
+    width: 700px
+  }
+
+  th:nth-child(4),
+  td:nth-child(4) {
+    width: 300px
   }
 
   #arrow-svg {
@@ -36,12 +71,15 @@
     rotate: 180deg
   }
 
-  tbody>tr:hover {
-    outline: 1px solid black
+  .complex-section {
+    background-color: powderblue;
+    padding: 15px;
+    margin: 15px 0;
+    overflow-x: auto
   }
 
-  textarea {
-    width: 100%
+  tbody>tr:hover {
+    outline: 1px solid black
   }
 </style>
 <div class="wrap">
@@ -50,10 +88,29 @@
     <?php wp_nonce_field('course_page_form_action', 'course_page_form_nonce') ?>
     <input type="hidden" id="course-page-json" name="course_page_json">
     <div id="simple-sections"></div>
+    <div>
+      <h2>Szekciók</h2>
+      <button type="button" id="complex-section-add" class="button button-primary">Hozzáadás</button>
+      <div id="complex-sections"></div>
+    </div>
     <?php submit_button('Mentés') ?>
   </form>
 </div>
 <script>
+  const cssUrl = '<?php echo get_stylesheet_uri() ?>'
+  const descriptionEditor = `
+  <?php
+  wp_editor(
+    '',
+    'description-editor',
+    array(
+      'media_buttons' => false,
+      'textarea_rows' => 5,
+      'quicktags' => false,
+    )
+  )
+  ?>`
+
   <?php $course_page_json = get_option('course_page_json') ?: 'null' ?>
   const originalData = '<?php echo $course_page_json ?>'
   const data = JSON.parse(originalData) ?? {
@@ -63,6 +120,7 @@
     sections: []
   }
 
+  const complexSections = data.sections
   const simpleSections = [{
       title: 'Értesítések',
       type: 'notifications',
@@ -92,6 +150,7 @@
   }
   const jsonInput = document.getElementById('course-page-json')
   const simpleSectionsEl = document.getElementById('simple-sections')
+  const complexSectionsEl = document.getElementById('complex-sections')
   const arrowSvg = `
     <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 -4.5 20 20" version="1.1" id="arrow-svg">
       <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
@@ -104,35 +163,60 @@
     </svg>
   `
 
+  const htmlCodes = [
+    ['<', '&lt;'],
+    ['>', '&gt;'],
+    ['"', '&quot;'],
+  ]
+
   let editingId = ''
 
-  function checkData() {
+  function html(text) {
+    htmlCodes.forEach(c => text = text.replaceAll(c[1], c[0]))
+    return text
+  }
+
+  function encodedHtml(text) {
+    htmlCodes.forEach(c => text = text.replaceAll(c[0], c[1]))
+    return text
+  }
+
+  function checkData(checkComplexSectionIsEmpty = false) {
+    if (!editingId && !checkComplexSectionIsEmpty) return true
+
+    if (editingId) {
+      setDescription()
+    }
+
     for (let i = 0; i < simpleSections.length; i++) {
       const section = simpleSections[i]
       for (let j = 0; j < section.sectionData.length; j++) {
-        const prefix = section.name + ` sor ${j + 1}: `
+        const prefix = section.title + ` sor ${j + 1}: `
         const r = section.sectionData[j]
         if (!r.name) {
           alert(prefix + `nincsen ${section.itemName} név`)
           return false
         }
-        if (!r.description) {
+        if (r.description === '') {
           alert(prefix + `nincsen Leírás`)
           return false
         }
       }
     }
 
-    for (let i = 0; i < data.sections.length; i++) {
-      const s = data.sections[i]
+    for (let i = 0; i < complexSections.length; i++) {
+      const s = complexSections[i]
       const name = s.name
       const prefix = `Szekciók sor ${i + 1}: `
       if (!name) {
         alert(prefix + 'nincsen Szekció név')
         return false
       }
-      if (s.description !== null && s.description === '') {
-        alert(prefix + 'üres a Leírás')
+
+      console.log(checkComplexSectionIsEmpty, s.subSections.length, s.hasDescription)
+      if (checkComplexSectionIsEmpty && s.subSections.length === 0 && !s.hasDescription) {
+        alert(`Szekció ${name}: nincsen Leírása vagy Alszekciói`)
+        return false
       }
 
       for (let j = 0; j < s.subSections.length; j++) {
@@ -143,12 +227,14 @@
           return false
         }
         if (!subS.description) {
+          console.log(subS)
           alert(prefix + 'nincsen Leírás')
           return false
         }
       }
     }
 
+    removeDesciptionEditor()
     return true
   }
 
@@ -178,14 +264,60 @@
     })
   }
 
-  function addDescriptionOnChange() {
-    types.forEach(type => {
-      document.querySelectorAll(`.${type}-description`).forEach(textarea => {
-        textarea.addEventListener('change', () => {
-          data[type][textarea.dataset.idx].description = textarea.value
-        })
-      })
+  function setupDescriptionEditor() {
+    if (!editingId) return
+
+    const params = editingId.split('-')
+    let description = ''
+    if (params.length === 2) {
+      description = data[params[0]][params[1]].description
+    } else {
+      description = complexSections[params[1]].subSections[params[2]].description
+    }
+
+    document.getElementById('description-editor').innerText = html(description)
+    window.tinyMCE.init({
+      selector: '#description-editor',
+      width: '100%',
+      content_css: '<?php echo get_template_directory_uri() . "/assets/css/tw.css" ?>',
+      menubar: false,
+      plugins: 'lists link fullscreen csucsplusz_shortcodes',
+      toolbar1: `
+        undo redo |
+        bold italic underline strikethrough |
+        bullist numlist |
+        link | fullscreen |
+      `,
+      toolbar2: 'price_shortcodes contact_shortcodes | copy_content_shortcode |'
     })
+  }
+
+  function getDescriptionEditor() {
+    return window.tinyMCE.get('description-editor')
+  }
+
+  function removeDesciptionEditor() {
+    if (editingId && getDescriptionEditor()) {
+      getDescriptionEditor().remove()
+    }
+  }
+
+  function setDescription() {
+    window.tinyMCE.triggerSave()
+    const editor = getDescriptionEditor()
+    const rawContent = editor.getContent({
+      format: 'raw'
+    })
+    const content = editor.getContent()
+    if (!content) return
+
+    const description = encodedHtml(rawContent.replaceAll('\n', ''))
+    const params = editingId.split('-')
+    if (params.length === 2) {
+      data[params[0]][params[1]].description = description
+    } else {
+      complexSections[params[1]].subSections[params[2]].description = description
+    }
   }
 
   function addDoneOnClick() {
@@ -203,7 +335,7 @@
         editButton.addEventListener('click', () => {
           if (!checkData()) return
 
-          editingId = type + editButton.dataset.idx
+          editingId = `${type}-${editButton.dataset.idx}`
           render()
         })
       })
@@ -216,6 +348,7 @@
         arrowUp.addEventListener('click', () => {
           if (!checkData()) return
 
+          editingId = ''
           const sectionData = data[type]
           const idx = parseInt(arrowUp.dataset.idx)
           const temp = sectionData[idx]
@@ -229,6 +362,7 @@
         arrowDown.addEventListener('click', () => {
           if (!checkData()) return
 
+          editingId = ''
           const d = data[type]
           const idx = parseInt(arrowDown.dataset.idx)
           const temp = d[idx]
@@ -245,7 +379,7 @@
       document.getElementById(s.type + '-add').addEventListener('click', () => {
         if (!checkData()) return
 
-        editingId = s.type + 0
+        editingId = `${s.type}-${0}`
         data[s.type].splice(0, 0, {
           name: '',
           description: ''
@@ -254,46 +388,51 @@
         render()
       })
     })
-    
   }
 
   function addSubSectionDeleteOnClick() {
-    document.querySelectorAll(`.sub-section-delete`).forEach(deleteButton => {
+    document.querySelectorAll(`.sub-delete`).forEach(deleteButton => {
       deleteButton.addEventListener('click', () => {
         const secIdx = deleteButton.dataset.secIdx
         const subIdx = deleteButton.dataset.subIdx
-        const name = data.sections[secIdx].subSections[subIdx].name
+        const name = complexSections[secIdx].subSections[subIdx].name
         if (name && !confirm(`Alszekció törlés megerősítése: '${name}'`)) return
 
         editingId = ''
-        data.sections[secIdx].subSections.splice(subIdx, 1)
-        renderSubSections()
+        complexSections[secIdx].subSections.splice(subIdx, 1)
+        render()
       })
     })
   }
 
   function addSubSectionNameOnChange() {
-    document.querySelectorAll(`.sub-section-name`).forEach(input => {
+    document.querySelectorAll(`.sub-name`).forEach(input => {
       input.addEventListener('change', () => {
-        data.sections[input.dataset.secIdx].subSections[input.dataset.subIdx].name = input.value
+        complexSections[input.dataset.secIdx].subSections[input.dataset.subIdx].name = input.value
       })
     })
   }
 
-  function addSubSectionDescriptionOnChange() {
-    document.querySelectorAll(`.sub-section-description`).forEach(textarea => {
-      textarea.addEventListener('change', () => {
-        data.sections[textarea.dataset.secIdx].subSections[textarea.dataset.subIdx].name = textarea.value
+  function addSubSectionEditOnClick() {
+    types.forEach(type => {
+      document.querySelectorAll(`.sub-edit`).forEach(editButton => {
+        editButton.addEventListener('click', () => {
+          if (!checkData()) return
+
+          editingId = `sub-${editButton.dataset.secIdx}-${editButton.dataset.subIdx}`
+          render()
+        })
       })
     })
   }
 
   function addSubSectionArrowOnClick() {
-    document.querySelectorAll(`.sub-section-arrow-up`).forEach(arrowUp => {
+    document.querySelectorAll(`.sub-arrow-up`).forEach(arrowUp => {
       arrowUp.addEventListener('click', () => {
         if (!checkData()) return
 
-        const s = data.sections[arrowUp.dataset.secIdx].subSections
+        editingId = ''
+        const s = complexSections[arrowUp.dataset.secIdx].subSections
         const idx = parseInt(arrowUp.dataset.subIdx)
         const temp = s[idx]
         s[idx] = s[idx - 1]
@@ -302,11 +441,12 @@
       })
     })
 
-    document.querySelectorAll(`.sub-section-arrow-down`).forEach(arrowDown => {
+    document.querySelectorAll(`.sub-arrow-down`).forEach(arrowDown => {
       arrowDown.addEventListener('click', () => {
         if (!checkData()) return
 
-        const s = data.sections[arrowDown.dataset.secIdx].subSections
+        editingId = ''
+        const s = complexSections[arrowDown.dataset.secIdx].subSections
         const idx = parseInt(arrowDown.dataset.subIdx)
         const temp = s[idx]
         s[idx] = s[idx + 1]
@@ -316,36 +456,93 @@
     })
   }
 
-  function deleteButton(type, idx) {
-    return `<button type="button" data-idx="${idx}" class="button button-secondary ${type}-delete">Törlés</button>`
+  function addSubSectionAddButtonOnClick() {
+    document.querySelectorAll('.sub-add').forEach(addButton => {
+      addButton.addEventListener('click', () => {
+        if (!checkData()) return
+
+        const idx = addButton.dataset.idx
+        editingId = `sub-${idx}-${0}`
+        complexSections[idx].subSections.splice(0, 0, {
+          name: '',
+          description: ''
+        })
+
+        render()
+      })
+    })
+  }
+
+  function addComplexSectionDescriptionToggleOnClick() {
+    document.querySelectorAll('.complex-description-toggle').forEach(addButton => {
+      addButton.addEventListener('click', () => {
+        const idx = addButton.dataset.idx
+        complexSections[idx].hasDescription = !complexSections[idx].hasDescription
+        render()
+      })
+    })
+  }
+
+  function addDescriptionPreview() {
+    const descriptions1 = Array.from(document.querySelectorAll('.description-preview')).map(descriptionEl => {
+      return {
+        descriptionEl,
+        descriptionText: data[descriptionEl.dataset.type][descriptionEl.dataset.idx].description
+      }
+    })
+
+    const descriptions2 = Array.from(document.querySelectorAll('.sub-description-preview')).map(descriptionEl => {
+      return {
+        descriptionEl,
+        descriptionText: complexSections[descriptionEl.dataset.secIdx].subSections[descriptionEl.dataset.subIdx].description
+      }
+    })
+
+    descriptions1.concat(descriptions2).forEach(d => {
+      const iframe = document.createElement('iframe')
+      iframe.srcdoc = `
+        <link rel="stylesheet" type="text/css" href="${cssUrl}">
+        ${html(d.descriptionText)}
+      `
+
+      d.descriptionEl.appendChild(iframe)
+    })
+  }
+
+  function deleteButton(type, idx, text = 'Törlés') {
+    return `<button type="button" data-idx="${idx}" class="button button-secondary ${type}-delete">${text}</button>`
   }
 
   function doneButton() {
     return `<button type="button" id="done" class="button button">Kész</button>`
   }
 
-  function editButton(type, idx) {
-    return `<button type="button" data-idx="${idx}" class="button button-secondary ${type}-edit">Szerkesztés</button>`
+  function editButton(type, idx, text = 'Szerkesztés') {
+    return `<button type="button" data-idx="${idx}" class="button button-secondary ${type}-edit">${text}</button>`
   }
 
   function arrows(type, idx) {
-    const upArrow = idx > 0 ? `<span class="${type}-arrow-up" data-idx="${idx}">${arrowSvg}</span>` : ''
-    const downArrow = idx < data[type].length - 1 ? `<span class="${type}-arrow-down" data-idx="${idx}">${arrowSvg}</span>` : ''
+    const upArrow = idx > 0 ? `<span class="arrow-up ${type}-arrow-up" data-idx="${idx}">${arrowSvg}</span>` : ''
+    const downArrow = idx < data[type].length - 1 ? `<span class="arrow-down ${type}-arrow-down" data-idx="${idx}">${arrowSvg}</span>` : ''
     return `
       <div style="display: inline-flex; gap: 0.2rem; align-items: center">
         ${upArrow}
         ${downArrow}
       </div>
     `
+  }
+
+  function subSectionDeleteButton(secIdx, subIdx) {
+    return `<button type="button" data-sec-idx="${secIdx}" data-sub-idx="${subIdx}" class="button button-secondary sub-delete">Törlés</button>`
   }
 
   function subSectionArrows(secIdx, subIdx) {
     const upArrow = subIdx > 0 ?
-      `<span class="arrow-up sub-section-arrow-up" data-sec-idx="${secIdx}" data-sub-idx="${subIdx}">${arrowSvg}</span>` :
+      `<span class="arrow-up sub-arrow-up" data-sec-idx="${secIdx}" data-sub-idx="${subIdx}">${arrowSvg}</span>` :
       ''
 
-    const downArrow = subIdx < data[secIdx].subSections.length - 1 ?
-      `<span class="arrow-down sub-section-arrow-down" data-sec-idx="${secIdx}" data-sub-idx="${subIdx}">${arrowSvg}</span>` :
+    const downArrow = subIdx < complexSections[secIdx].subSections.length - 1 ?
+      `<span class="arrow-down sub-arrow-down" data-sec-idx="${secIdx}" data-sub-idx="${subIdx}">${arrowSvg}</span>` :
       ''
 
     return `
@@ -354,14 +551,52 @@
         ${downArrow}
       </div>
     `
+  }
+
+  function complexSectionDescription(section, idx) {
+    if (editingId === 'sections-' + idx) {
+      return `
+        <div style="${section.hasDescription ? '' : 'display: none'}">${descriptionEditor}</div>
+      `
+    } else if (section.hasDescription) {
+      return `<div class="description-preview" data-type="sections" data-idx="${idx}"></div>`
+    }
+
+    return `<p>nincsen</p>`
+  }
+
+  function complexSectionName(section, idx) {
+    return editingId === 'sections-' + idx ?
+      `<div><input type="text" value="${section.name}" placeholder="Szekció neve" data-idx="${idx}" class="sections-name" size="40"></div>` :
+      `<h3>${section.name}</h2>`
+  }
+
+  function complexSectionMenu(section, idx) {
+    const descriptionButton = section.hasDescription ?
+      `<button type="button" data-idx="${idx}" class="button button-secondary complex-description-toggle">Leírás törlése</button>` :
+      `<button type="button" data-idx="${idx}" class="button button-primary complex-description-toggle">Leírás hozzáadása</button>`
+
+    return editingId === 'sections-' + idx ? `
+      ${doneButton()}
+      ${descriptionButton}
+      ${deleteButton('sections', idx, 'Szekció törlése')}
+    ` : `
+      ${editButton('sections', idx, 'Szekció szerkesztése')}
+      ${deleteButton('sections', idx, 'Szekció törlése')}
+      ${arrows('sections', idx)}
+    `
+  }
+
+  function simpleSectionsContent() {
+    return simpleSections.map(section => simpleSectionTable(section)).join('')
   }
 
   function simpleSectionTable(section) {
     const type = section.type
     const rows = section.sectionData.map((row, idx) =>
-      editingId === type + idx ?
-        simpleSectionEditRow(section, row, idx) :
-        simpleSectionRow(type, row, idx)
+      editingId === `${type}-${idx}` ?
+      simpleSectionEditRow(section, row, idx) :
+      simpleSectionRow(type, row, idx)
     ).join('')
 
     return `
@@ -381,16 +616,12 @@
     `
   }
 
-  function simpleSectionsContent() {
-    return simpleSections.map(section => simpleSectionTable(section)).join('')
-  }
-
   function simpleSectionRow(type, row, idx) {
     return `
       <tr>
         <td>${idx + 1}</td>
         <td>${row.name}</td>
-        <td>${row.description.replaceAll('\n', '<br>')}</td>
+        <td class="description-preview" data-type="${type}" data-idx="${idx}"></td>
         <td>
           ${editButton(type, idx)}
           ${deleteButton(type, idx)}
@@ -408,9 +639,7 @@
         <td>
           <input type="text" placeholder="${section.itemName} neve" value="${row.name}" data-idx="${idx}" class="${type}-name" size="40">
         </td>
-        <td>
-          <textarea placeholder="Leírás" data-idx="${idx}" class="${type}-description">${row.description}</textarea>
-        </td>
+        <td>${descriptionEditor}</td>
         <td>
           ${doneButton()}
           ${deleteButton(type, idx)}
@@ -419,28 +648,118 @@
     `
   }
 
+  function complexSectionContent() {
+    return complexSections.map((section, secIdx) => complexSectionTable(section, secIdx)).join('')
+  }
+
+  function complexSectionTable(section, secIdx) {
+    const rows = section.subSections.map((row, subIdx) =>
+      editingId === `sub-${secIdx}-${subIdx}` ?
+      complexSectionEditRow(row, secIdx, subIdx) :
+      complexSectionRow(row, secIdx, subIdx)
+    ).join('')
+
+    const addSubSectionButton = `<button type="button" class="sub-add button button-primary" data-idx="${secIdx}">Alszekció hozzáadása</button>`
+    const subSectionsTable = rows ? `
+      <h3>Alszekciók</h3>
+      ${addSubSectionButton}
+      <table class="form-table">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Alszekció neve</th>
+            <th>Leírás</th>
+            <th>Műveletek</th>
+          </tr>
+        </thead>
+        <tbody>${rows}</tbody>
+      </table>` :
+      addSubSectionButton
+
+    return `
+      <div class="complex-section">
+        <div style="display: flex; justify-content: space-between; margin-bottom: 15px">
+          <div style="flex-grow: 1">
+            ${complexSectionName(section, secIdx)}
+            <h3>Szekció leírása</h3>
+            ${complexSectionDescription(section, secIdx)}
+          </div>
+          <div>${complexSectionMenu(section, secIdx)}</div>
+        </div>
+        ${subSectionsTable}
+      </div>
+    `
+  }
+
+  function complexSectionRow(row, secIdx, subIdx) {
+    return `
+      <tr>
+        <td>${subIdx + 1}</td>
+        <td>${row.name}</td>
+        <td class="sub-description-preview" data-sec-idx="${secIdx}" data-sub-idx="${subIdx}"></td>
+        <td>
+          <button type="button" data-sec-idx="${secIdx}" data-sub-idx="${subIdx}" class="button button-secondary sub-edit">Szerkesztés</button>
+          ${subSectionDeleteButton(secIdx, subIdx)}
+          ${subSectionArrows(secIdx, subIdx)}
+        </td>
+      </tr>
+    `
+  }
+
+  function complexSectionEditRow(row, secIdx, subIdx) {
+    return `
+      <tr>
+        <td>${subIdx + 1}</td>
+        <td>
+          <input type="text" placeholder="Alszekció neve" value="${row.name}" data-sec-idx="${secIdx}" data-sub-idx="${subIdx}" class="sub-name" size="40">
+        </td>
+        <td>${descriptionEditor}</td>
+        <td>
+          ${doneButton()}
+          ${subSectionDeleteButton(secIdx, subIdx)}
+        </td>
+      </tr>
+    `
+  }
+
   function render() {
+    removeDesciptionEditor()
     simpleSectionsEl.innerHTML = simpleSectionsContent()
+    complexSectionsEl.innerHTML = complexSectionContent()
     addDeleteOnClick()
     addNameOnChange()
-    addDescriptionOnChange()
     addDoneOnClick()
     addEditOnClick()
     addArrowOnClick()
     addSimpleSectionsAddButtonOnClick()
+    addSubSectionDeleteOnClick()
+    addSubSectionNameOnChange()
+    addSubSectionEditOnClick()
+    addSubSectionArrowOnClick()
+    addSubSectionAddButtonOnClick()
+    addComplexSectionDescriptionToggleOnClick()
+    setupDescriptionEditor()
+    addDescriptionPreview()
   }
-  render()
+  window.addEventListener('load', render)
+
+  document.getElementById('complex-section-add').addEventListener('click', () => {
+    if (!checkData()) return
+
+    editingId = `sections-${0}`
+    complexSections.splice(0, 0, {
+      name: '',
+      hasDescription: false,
+      description: '',
+      subSections: []
+    })
+
+    render()
+  })
 
   let submitted = false
   document.querySelector('form').addEventListener('submit', (e) => {
-    trainings.deleted = Array.from(deleted)
-    if (!data.noTrainingStartText) {
-      e.preventDefault()
-      alert('Üres a Nincsen képzés szöveg mező')
-      return
-    }
-
-    if (editingId || !checkData()) {
+    if (editingId || !checkData(true)) {
       e.preventDefault()
       if (editingId) {
         alert('Szerkesztés közben nem lehet menteni')

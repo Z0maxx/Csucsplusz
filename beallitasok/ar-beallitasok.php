@@ -432,8 +432,9 @@
         arrowUp.addEventListener('click', () => {
           if (!checkPrices()) return
 
+          editingId = ''
           const idx = parseInt(arrowUp.dataset.idx)
-          const list = prices[arrowUp.dataset.type]
+          const list = prices[type]
           const temp = list[idx]
           list[idx] = list[idx - 1]
           list[idx - 1] = temp
@@ -445,8 +446,9 @@
         arrowDown.addEventListener('click', () => {
           if (!checkPrices()) return
 
+          editingId = ''
           const idx = parseInt(arrowDown.dataset.idx)
-          const list = prices[arrowDown.dataset.type]
+          const list = prices[type]
           const temp = list[idx]
           list[idx] = list[idx + 1]
           list[idx + 1] = temp
@@ -473,8 +475,8 @@
   }
 
   function arrows(type, idx) {
-    const upArrow = idx > 0 ? `<span class="arrow-up ${type}-arrow-up" data-idx="${idx}" data-type="${type}">${arrowSvg}</span>` : ''
-    const downArrow = idx < prices[type].length - 1 ? `<span class="arrow-down ${type}-arrow-down" data-idx="${idx}" data-type="${type}">${arrowSvg}</span>` : ''
+    const upArrow = idx > 0 ? `<span class="arrow-up ${type}-arrow-up" data-idx="${idx}">${arrowSvg}</span>` : ''
+    const downArrow = idx < prices[type].length - 1 ? `<span class="arrow-down ${type}-arrow-down" data-idx="${idx}">${arrowSvg}</span>` : ''
     return `
       <div style="display: inline-flex; gap: 0.2rem; align-items: center">
         ${upArrow}

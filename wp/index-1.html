@@ -12,12 +12,12 @@
     </div>
   </div>
 </section>
-<section class="flex justify-center py-4">
+<section class="flex justify-center py-4 bg-sky-200">
   <div class="w-9/10 lg:w-4/5 lg:min-w-[63rem]">
     <h2 class="inline-block pb-0.75 mb-1 text-2xl font-bold sm:text-3xl bg-gradient-to-r from-cyan-500 to-violet-500 text-cyan-800">
       <span class="block pb-1 bg-sky-200 ">Képzéseink</span>
     </h2>
-    <div class="w-auto px-2 py-1 text-lg font-medium rounded-md">[képzések]</div>
+    <div class="flex flex-col gap-2">[képzések]</div>
   </div>
 </section>
 <section class="flex justify-center py-4 bg-cyan-100">
@@ -59,7 +59,7 @@
             </span>
             <div class="flex flex-col gap-2">
               <span class="text-lg font-semibold md:text-xl text-mist-600">Telefonszám</span>
-              <a href="tel:+36202099759" class="px-2 py-1 font-medium text-indigo-900 bg-teal-100 rounded-xl">[telefonszám]</a>
+              <span class="px-2 py-1 font-medium text-indigo-900 bg-teal-100 rounded-xl">[telefonszám]</span>
             </div>
           </div>
           <div class="flex items-center gap-2 md:gap-4 justify-start py-1.5 bg-teal-200 rounded-xl border-4 border-teal-200 w-full md:w-87 px-0.5 md:px-2">
@@ -71,7 +71,7 @@
             </span>
             <div class="flex flex-col gap-2">
               <span class="text-lg font-medium md:text-xl text-mist-600">Email</span>
-              <a href="mailto:info@csucsplusz.hu" class="px-2 py-1 font-medium text-indigo-900 bg-teal-100 rounded-xl">[email]</a>
+              <span class="px-2 py-1 font-medium text-indigo-900 bg-teal-100 rounded-xl">[email]</span>
             </div>
           </div>
         </div>
@@ -111,13 +111,17 @@
           </div>
         </div>
       </div>
-      <div class="relative flex-1 w-full overflow-hidden min-h-120 lg:min-h-0 rounded-xl">
-        <iframe class="-left-[80%] -top-[40%] md:-left-[70%] absolute w-[180%] h-180" style="border:0;" src="https://maps.google.com/maps?q=B%C3%A1nki%20Don%C3%A1t%20park%201%2C%20Budapest&t=m&z=16&ie=UTF8&iwloc=&output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-      </div>
+      <div id="map-container" class="relative flex-1 w-full overflow-hidden min-h-120 lg:min-h-0 rounded-xl">
+          <noscript>
+            <img src="imgs/map.png" class="h-full">
+          </noscript>
+          <iframe class="hidden w-full h-120 lg:h-full sm:block" src="https://umap.openstreetmap.fr/hu/map/csucsplusz-autosiskola_1404279#16/47.505555/19.130673" frameborder="0"></iframe>
+          <iframe class="w-full h-120 lg:h-full sm:hidden" src="https://umap.openstreetmap.fr/hu/map/csucsplusz-autosiskola_1404279#15/47.505504/19.130716" frameborder="0"></iframe>
+        </div>
     </div>
   </div>
 </section>
-<section class="flex justify-center py-4">
+<section class="flex justify-center py-4 bg-sky-200">
   <div class="w-9/10 lg:w-4/5 lg:min-w-[63rem]">
     <h2 class="inline-block mb-1 text-2xl sm:text-3xl font-bold pb-0.75 bg-gradient-to-r from-cyan-500 to-violet-500 text-cyan-800">
       <span class="block pb-1 bg-sky-200">Oktatóink</span>

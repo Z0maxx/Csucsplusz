@@ -68,11 +68,13 @@ class Prices
 
 /**
  * @param string $name
+ * @param string $hungarianName
  * @param string $type
  */
 abstract class PriceClass
 {
   public string $name;
+  public string $hungarianName;
   public string $type;
 
   public function __construct(string $name, string $type)
@@ -100,6 +102,7 @@ class ValueWrap extends PriceClass
 
 /**
  * @param string $name
+ * @param string $hungarianName
  * @param string $type
  * @param string $startingValue
  * @param array<Variable> $variables
@@ -107,6 +110,7 @@ class ValueWrap extends PriceClass
 class Calculated extends PriceClass
 {
   public string $startingValue;
+  public string $hungarianName;
   public array $variables;
 
   public function __construct(string $name, string $type, string $startingValue, array $variables = [])
@@ -218,7 +222,7 @@ add_action('admin_init', function () {
     isset($_POST['prices_json']) &&
     current_user_can('manage_options')
   ) {
-    $json = str_replace('\"', '"', $_POST['prices_json']);
+    $json = wp_unslash($_POST['prices_json']);
     $prices = Prices::create(json_decode($json));
     /** @var string $deleted */
     foreach ($prices->deleted as $deleted) {

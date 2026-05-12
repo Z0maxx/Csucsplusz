@@ -33,7 +33,7 @@ add_action('admin_init', function () {
     isset($_POST['email']) &&
     isset($_POST['address'])
   ) {
-    $crt_json = str_replace('\"', '"', $_POST['crt_json']);
+    $crt_json = wp_unslash($_POST['crt_json']);
     update_option('crt_json', $crt_json);
     update_option('phone_contact', sanitize_text_field($_POST['phone']));
     update_option('email_contact', sanitize_text_field($_POST['email']));

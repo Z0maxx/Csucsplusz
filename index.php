@@ -20,10 +20,19 @@
       <h2 class="inline-block pb-0.75 mb-1 text-2xl font-bold sm:text-3xl bg-gradient-to-r from-cyan-500 to-violet-500 text-cyan-800">
         <span class="block pb-1 bg-sky-200 ">Képzéseink</span>
       </h2>
-      <div class="w-auto px-2 py-1 text-lg font-medium rounded-md">Tantermi elsősegélynyújtó tanfolyam: következő indulási időpontot a honlapunkon jelezzük.</div>
-      <div class="w-auto px-2 py-1 text-lg font-medium rounded-md">
-        <div>Tantermi képzés: következő indulási időpontot a honlapunkon jelezzük.</div>
-        <div>E-learning képzés: folyamatosan elérhető.</div>
+      <div class="flex flex-col gap-2">
+        <div class="px-2 py-1 text-lg border-2 rounded-md bg-emerald-100 border-emerald-300">
+          <h2 class="font-medium">Tantermi elsősegélynyújtó tanfolyam:</h2>
+          <div class="font-medium text-blue-700">a következő indulási dátumot itt jelezzük</div>
+        </div>
+        <div class="px-2 py-1 text-lg border-2 rounded-md bg-emerald-100 border-emerald-300">
+          <h2 class="font-medium">Tantermi képzés:</h2>
+          <div class="text-white bg-lime-600 px-1.5 py-0.5 rounded-sm w-fit font-medium">következő indulási dátum 2026-05-24</div>
+        </div>
+        <div class="px-2 py-1 text-lg border-2 rounded-md bg-emerald-100 border-emerald-300">
+          <h2 class="font-medium">E-learning képzés:</h2>
+          <div>folyamatosan elérhető.</div>
+        </div>
       </div>
       <div></div>
     </div>
@@ -67,7 +76,7 @@
               </span>
               <div class="flex flex-col gap-2">
                 <span class="text-lg font-semibold md:text-xl text-mist-600">Telefonszám</span>
-                <a href="tel:+36202099759" class="px-2 py-1 font-medium text-indigo-900 bg-teal-100 rounded-xl">+36 20 2099 759</a>
+                <a href="tel:+36 20 2099 759" class="px-2 py-1 font-medium text-indigo-900 bg-teal-100 rounded-xl">+36 20 2099 759</a>
               </div>
             </div>
             <div class="flex items-center gap-2 md:gap-4 justify-start py-1.5 bg-teal-200 rounded-xl border-4 border-teal-200 w-full md:w-86 px-0.5 md:px-2">

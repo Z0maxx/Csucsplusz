@@ -1,4 +1,20 @@
 <style>
+  iframe {
+    width: 100%;
+  }
+
+  ul li::marker {
+    content: '- '
+  }
+
+  li ul li::marker {
+    content: '> '
+  }
+
+  li ul li ul li::marker {
+    content: '* '
+  }
+
   tbody tr:nth-child(odd) {
     background-color: lightgray
   }
@@ -9,6 +25,7 @@
 
   table {
     table-layout: fixed;
+    max-width: 1340px;
   }
 
   th:first-child,
@@ -39,10 +56,6 @@
   th:nth-child(6),
   td:nth-child(6) {
     width: 300px
-  }
-
-  .form-table {
-    width: 1340px;
   }
 
   #arrow-svg {
@@ -102,6 +115,7 @@
   </form>
 </div>
 <script>
+  const cssUrl = '<?php echo get_stylesheet_uri() ?>'
   const descriptionEditor = `
   <?php
   wp_editor(
@@ -109,12 +123,11 @@
     'description-editor',
     array(
       'media_buttons' => false,
-      'textarea_rows' => 10,
+      'textarea_rows' => 5,
       'quicktags' => false,
     )
   )
-  ?>
-  `
+  ?>`
 
   <?php $trainings_json = get_option('trainings_json') ?: 'null' ?>
   const originalData = '<?php echo $trainings_json ?>'
@@ -142,19 +155,28 @@
     </svg>
   `
 
+  const htmlCodes = [
+    ['<', '&lt;'],
+    ['>', '&gt;'],
+    ['"', '&quot;'],
+  ]
+
   let editingId = ''
 
   function html(text) {
-    return text.replaceAll('&lt;', '<').replaceAll('&gt;', '>')
+    htmlCodes.forEach(c => text = text.replaceAll(c[1], c[0]))
+    return text
   }
 
   function encodedHtml(text) {
-    return text.replaceAll('<', '&lt;').replaceAll('>', '&gt;')
+    htmlCodes.forEach(c => text = text.replaceAll(c[0], c[1]))
+    return text
   }
 
   function checkData() {
     if (!editingId) return true
 
+    setDescription()
     for (let i = 0; i < trainings.length; i++) {
       const t = trainings[i]
       const prefix = `Sor ${i + 1}: `
@@ -164,6 +186,7 @@
       }
     }
 
+    removeDesciptionEditor()
     return true
   }
 
@@ -193,7 +216,6 @@
   function addHasStartDateOnChange() {
     document.querySelectorAll(`.has-start-date`).forEach(input => {
       input.addEventListener('change', () => {
-        console.log(input.checked)
         trainings[input.dataset.idx].hasStartDate = input.checked
         renderTrainings()
       })
@@ -209,43 +231,51 @@
   }
 
   function setupDescriptionEditor() {
-    if (editingId) {
-      document.getElementById('description-editor').innerText = html(trainings[editingId].description)
-      window.tinyMCE.init({
-        selector: '#description-editor',
-        width: '100%',
-        menubar: false,
-        plugins: 'lists link fullscreen',
-        toolbar: `
-          undo redo |
-          bold italic underline strikethrough |
-          bullist numlist |
-          link
-        `
-      })
+    if (!editingId) return
+
+    document.getElementById('description-editor').innerText = html(trainings[editingId].description)
+    window.tinyMCE.init({
+      selector: '#description-editor',
+      width: '100%',
+      content_css: '<?php echo get_template_directory_uri() . "/assets/css/tw.css" ?>',
+      menubar: false,
+      plugins: 'lists link fullscreen csucsplusz_shortcodes',
+      toolbar1: `
+        undo redo |
+        bold italic underline strikethrough |
+        bullist numlist |
+        link | fullscreen |
+      `,
+      toolbar2: 'price_shortcodes contact_shortcodes | copy_content_shortcode |'
+    })
+  }
+
+  function getDescriptionEditor() {
+    return window.tinyMCE.get('description-editor')
+  }
+
+  function removeDesciptionEditor() {
+    if (editingId && getDescriptionEditor()) {
+      getDescriptionEditor().remove()
     }
   }
 
   function setDescription() {
     window.tinyMCE.triggerSave()
-    const editor = window.tinyMCE.get('description-editor')
-    trainings[editingId].description = encodedHtml(window.tinyMCE.get('description-editor').getContent())
-    editor.remove()
-  }
-
-  function addCopyOnClick() {
-    document.querySelectorAll(`.copy`).forEach(copyButton => {
-      copyButton.addEventListener('click', () => {
-        navigator.clipboard.writeText(`[képzés="${trainings[copyButton.dataset.idx].name}"]`)
-      })
+    const editor = getDescriptionEditor()
+    const rawContent = editor.getContent({
+      format: 'raw'
     })
+    const content = editor.getContent()
+    if (!content) return
+
+    trainings[editingId].description = content ? encodedHtml(rawContent.replaceAll('\n', '')) : ''
   }
 
   function addDoneOnClick() {
     document.getElementById('done')?.addEventListener('click', () => {
       if (!checkData()) return
 
-      setDescription()
       editingId = ''
       renderTrainings()
     })
@@ -267,6 +297,7 @@
       arrowUp.addEventListener('click', () => {
         if (!checkData()) return
 
+        editingId = ''
         const idx = parseInt(arrowUp.dataset.idx)
         const temp = trainings[idx]
         trainings[idx] = trainings[idx - 1]
@@ -279,6 +310,7 @@
       arrowDown.addEventListener('click', () => {
         if (!checkData()) return
 
+        editingId = ''
         const idx = parseInt(arrowDown.dataset.idx)
         const temp = trainings[idx]
         trainings[idx] = trainings[idx + 1]
@@ -288,8 +320,16 @@
     })
   }
 
-  function copyButton(idx) {
-    return `<button type="button" data-idx="${idx}" class="button button-primary copy">Másolás</button>`
+  function addDescriptionPreview() {
+    document.querySelectorAll('.description-preview').forEach(description => {
+      const iframe = document.createElement('iframe');
+      iframe.srcdoc = `
+        <link rel="stylesheet" type="text/css" href="${cssUrl}">
+        ${html(trainings[description.dataset.idx].description)}
+      `
+
+      description.appendChild(iframe)
+    })
   }
 
   function deleteButton(idx) {
@@ -328,9 +368,8 @@
         <td>${t.name}</td>
         <td>${t.hasStartDate ? 'Igen' : 'Nem'}</td>
         <td>${t.startDate}</td>
-        <td>${html(t.description)}</td>
+        <td class="description-preview" data-idx="${idx}"></td>
         <td>
-          ${copyButton(idx)}
           ${editButton(idx)}
           ${deleteButton(idx)}
           ${arrows(idx)}
@@ -361,9 +400,9 @@
   }
 
   function renderTrainings() {
+    removeDesciptionEditor()
     trainingsEl.innerHTML = content()
     addDeleteOnClick()
-    addCopyOnClick()
     addNameOnChange()
     addHasStartDateOnChange()
     addStartDateOnChange()
@@ -371,8 +410,9 @@
     addEditOnClick()
     addArrowOnClick()
     setupDescriptionEditor()
+    addDescriptionPreview()
   }
-  renderTrainings()
+  window.addEventListener('load', renderTrainings)
 
   noTrainingStartTextInput.addEventListener('input', () => {
     data.noTrainingStartText = noTrainingStartTextInput.value

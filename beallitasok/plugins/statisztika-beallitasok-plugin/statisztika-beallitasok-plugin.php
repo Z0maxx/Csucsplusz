@@ -30,7 +30,7 @@ add_action('admin_init', function () {
     current_user_can('manage_options') &&
     isset($_POST['stat_json'])
   ) {
-    update_option('stat_json', str_replace('\"', '"', $_POST['stat_json']));
+    update_option('stat_json', wp_unslash($_POST['stat_json']));
     add_action('admin_notices', function () {
       echo '
         <div class="notice notice-success is-dismissible">

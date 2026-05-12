@@ -1,0 +1,136 @@
+<div class="control-div">
+  <label for="your-name" class="control-title">
+    Név <span class="control-required">*</span>
+  </label>
+  [text* your-name id:your-name]
+</div>
+
+<div class="control-div">
+  <label for="birth-name" class="control-title">
+    Születéskori név <span class="control-required">*</span>
+  </label>
+  [text* birth-name id:birth-name]
+</div>
+
+<div class="control-div">
+  <label for="birth-place" class="control-title">
+    Születési hely <span class="control-required">*</span>
+  </label>
+  [text* birth-place id:birth-place]
+</div>
+
+<div class="control-div">
+  <label for="birth-date" class="control-title">
+    Születési idő <span class="control-required">*</span>
+  </label>
+  [date* birth-date id:birth-date]
+</div>
+
+<div class="control-div">
+  <label for="mother-name" class="control-title">
+    Anyja születési neve <span class="control-required">*</span>
+  </label>
+  [text* mother-name id:mother-name]
+</div>
+
+<div class="control-div">
+  <label for="citizenship" class="control-title">
+    Állampolgárság <span class="control-required">*</span>
+  </label>
+  [text* citizenship id:citizenship "magyar"]
+</div>
+
+<div class="control-div">
+  <label for="school" class="control-title">
+    Legmagasabb iskolai végzettség <span class="control-required">*</span>
+  </label>
+  [select* school include_blank id:school "Legfeljebb 8 általános" "Szakiskola, szakmunkásképző" "Gimnázium" "Szakközépiskola" "Főiskola, egyetem, PhD"]
+</div>
+
+<div class="control-div">
+  <label for="id-number" class="control-title">
+    Személyi igazolvány szám <span class="control-required">*</span>
+  </label>
+  [text* id-number id:id-number placeholder " "]
+</div>
+
+<div class="control-div">
+  <label for="home-address" class="control-title">
+    Tartózkodási cím <span class="control-required">*</span>
+  </label>
+  [text* home-address id:home-address placeholder " "]
+</div>
+
+<div class="control-div">
+  <label for="mail-address" class="control-title">
+    Értesítési cím <span class="control-required">*</span>
+  </label>
+  [text* mail-address id:mail-address autocomplete:off placeholder " "]
+</div>
+
+<div class="control-div">
+  <label for="phone" class="control-title">
+    Telefon <span class="control-required">*</span>
+  </label>
+  [tel* phone id:phone autocomplete:phone placeholder " "]
+</div>
+
+<div class="control-div">
+  <label for="taxnum" class="control-title">
+    Adóazonosító jel <span class="control-required">*</span>
+  </label>
+  [text* taxnum id:taxnum placeholder " "]
+</div>
+
+<div class="control-div">
+  <label for="taxnum" class="control-title">
+    E-mail cím <span class="control-required">*</span>
+  </label>
+  [email* email autocomplete:email placeholder " "]
+</div>
+
+<div class="control-div">
+  <span class="control-title">
+    Járművezetéstől el vagyok tiltva <span class="control-required">*</span>
+  </span>
+  <div>
+  [radio drive-banned use_label_element default:2 "Igen" "Nem"]
+  </div>
+</div>
+
+<div class="control-div">
+  <span class="control-title">
+    2 éven belüli forgalmi vizsga <span class="control-required">*</span>
+  </span>
+  [radio have-traffic-exam use_label_element default:2 "Van" "Nincs"]
+</div>
+
+<div class="control-div">
+  <span class="control-title">
+    Kamera használatához hozzájárulok a KRESZ vizsgán <span class="control-required">*</span>
+  </span>
+  [radio use-camera use_label_element default:1 "Igen" "Nem"]
+</div>
+
+<div class="control-div">
+  <label for="courseType" class="control-title">
+    Tanfolyam típusa <span class="control-required">*</span>
+  </label>
+  [select* courseType include_blank id:courseType "E-learning" "Tantermi"]
+</div>
+
+<div class="control-div">
+  <label for="attachedFile" class="control-title">
+    Kérjük csatolja vezetői engedélyét vagy orvosi igazolását! <span class="control-required">*</span>
+  </label>
+  [file* attachedFile limit:10485760 filetypes:gif|png|jpg|jpeg|pdf]
+</div>
+
+<div class="control-div">
+  <label for="your-message" class="control-title">
+    Üzenet
+  </label>
+  [textarea your-message id:your-message rows:5]
+</div>
+
+<button type="submit"><span>Küldés</span></button>

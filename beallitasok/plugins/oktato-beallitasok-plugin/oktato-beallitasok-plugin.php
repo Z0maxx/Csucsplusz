@@ -36,7 +36,7 @@ add_action('admin_init', function () {
     current_user_can('manage_options') &&
     isset($_POST['instructors_json'])
   ) {
-    $json = str_replace('\"', '"', $_POST['instructors_json']);
+    $json = wp_unslash($_POST['instructors_json']);
     $instructors = json_decode($json);
     /** @var Instructor $instructor */
     foreach ($instructors as $instructor) {

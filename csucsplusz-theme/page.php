@@ -10,7 +10,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 get_header();
 ?>
 
-<main class="bg-sky-200">
+<main>
     <?php
     while ( have_posts() ) {
         the_post();
